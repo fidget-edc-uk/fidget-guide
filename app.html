@@ -1,0 +1,1369 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fidget Toy Guide</title>
+<meta name="description" content="An illustrated guide to fidget toys: sliders, spinners, clickers and more, with live demos, materials, tuning and play styles.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: sticky machined-plate menu with a Types dropdown; hash-routed pages. Each type page = hero + live demo, then varieties, anatomy, tuning, play styles, examples. Dark-first. */
+:root{
+  --bg:#141619; --surface:#1d2024; --surface-2:#262a2f; --line:#343940;
+  --fg:#ecebe6; --muted:#a3a7ad;
+  --ti:#7fa6d6; --brass:#d4ae62; --copper:#c97a52;
+  --accent:var(--brass); --on-accent:#1a1508;
+  --warn:#e3a35b;
+  --display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body:"Figtree", "Helvetica Neue", Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --radius:14px;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#eeede8; --surface:#f8f7f3; --surface-2:#e4e2db; --line:#cfccc3;
+    --fg:#1c1e21; --muted:#5d6168;
+    --ti:#3a68a3; --brass:#94701f; --copper:#a1532f;
+    --accent:var(--brass); --on-accent:#fffaf0; --warn:#a8620f;
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#eeede8; --surface:#f8f7f3; --surface-2:#e4e2db; --line:#cfccc3;
+  --fg:#1c1e21; --muted:#5d6168;
+  --ti:#3a68a3; --brass:#94701f; --copper:#a1532f;
+  --accent:var(--brass); --on-accent:#fffaf0; --warn:#a8620f;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--body)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:clamp(2.3rem,6.5vw,4rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:800;letter-spacing:-.01em}
+h3{font-size:1.12rem;font-weight:700}
+p{margin:0}
+.label{font:600 .72rem/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{color:var(--muted);max-width:62ch;font-size:1.05rem}
+.tagline{font:600 1.15rem/1.4 var(--display);color:var(--accent);max-width:40ch}
+
+/* Header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:12px;padding-block:10px;position:relative}
+.brand{font:800 1.05rem var(--display);text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.screw{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--fg),var(--muted) 60%);position:relative;flex:none}
+.screw::after{content:"";position:absolute;left:3px;right:3px;top:6px;height:2px;background:var(--bg);transform:rotate(-30deg)}
+nav{margin-left:auto}
+.nav-list{list-style:none;margin:0;padding:0;display:flex;gap:2px;align-items:center}
+.nav-list a,.drop-btn{display:block;text-decoration:none;font:500 .9rem var(--body);color:var(--muted);padding:6px 10px;border-radius:999px;background:none;border:0;cursor:pointer;white-space:nowrap}
+.nav-list a:hover,.drop-btn:hover{color:var(--fg)}
+.nav-list a.active,.drop-btn.active{color:var(--on-accent);background:var(--accent)}
+.has-drop{position:relative}
+.drop{list-style:none;margin:0;padding:8px;position:absolute;top:calc(100% + 8px);left:0;min-width:230px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(0,0,0,.3);display:grid;gap:2px}
+.drop a{border-radius:8px;display:flex;align-items:center;gap:10px;color:var(--fg)}
+.drop a svg{width:22px;height:22px;flex:none}
+.drop a.active{background:var(--surface-2);color:var(--fg)}
+.icon-btn{background:var(--surface);border:1px solid var(--line);color:var(--fg);border-radius:10px;padding:7px 11px;font:600 .82rem var(--body);cursor:pointer;white-space:nowrap}
+.icon-btn[aria-pressed="false"]{color:var(--muted)}
+.menu-btn{display:none}
+@media (max-width:900px){
+  .menu-btn{display:block;margin-left:auto}
+  nav{position:absolute;left:0;right:0;top:100%;margin:0;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));max-height:calc(100vh - 70px);overflow:auto}
+  nav[data-open="false"]{display:none}
+  .nav-list{flex-direction:column;align-items:stretch}
+  .nav-list a,.drop-btn{font-size:1rem;padding:10px 12px;border-radius:10px;text-align:left;width:100%}
+  .drop-btn{pointer-events:none;color:var(--muted);font:600 .72rem var(--mono);letter-spacing:.12em;text-transform:uppercase;padding-top:14px}
+  .drop-btn span{display:none}
+  .drop{position:static;box-shadow:none;border:0;background:none;padding:0 0 0 6px;min-width:0}
+  .drop[hidden]{display:grid!important}
+}
+
+section{padding-block:52px;border-bottom:1px solid var(--line);scroll-margin-top:70px}
+[id^="a-"]{scroll-margin-top:70px}
+.sec-head{display:grid;gap:10px;margin-bottom:26px}
+
+/* Heroes */
+.hero{padding-block:44px 52px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:start}
+.hero-grid.solo{grid-template-columns:1fr}
+@media (max-width:780px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.hero-copy{display:grid;gap:16px;min-width:0}
+.facts-row{display:flex;flex-wrap:wrap;gap:8px}
+.fact{display:inline-flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.88rem}
+.fact b{font:600 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.jump{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.9rem;color:var(--muted)}
+.jump a{color:var(--fg);text-decoration-color:var(--accent);text-underline-offset:3px}
+
+/* Demo shell */
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;display:grid;gap:14px;min-width:0}
+.demo-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.demo-row .label{min-width:92px}
+.demo-meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.count{font:600 .8rem var(--mono);color:var(--accent)}
+.how-it{display:grid;gap:4px;padding:12px 14px;background:var(--bg);border-radius:10px;border:1px solid var(--line)}
+.how-it strong{font-family:var(--display)}
+.how-it p{color:var(--muted);font-size:.92rem}
+.hint{font-size:.86rem;color:var(--muted)}
+.chip{background:var(--surface);border:1px solid var(--line);color:var(--fg);border-radius:999px;padding:6px 12px;font:500 .86rem var(--body);cursor:pointer;transition:background .2s,border-color .2s}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.demo .chip{background:var(--bg)}
+.demo .chip[aria-pressed="true"]{background:var(--accent)}
+.stage{position:relative;border-radius:16px;background:linear-gradient(180deg,var(--surface-2),var(--surface));border:1px solid var(--line);touch-action:none;user-select:none;-webkit-user-select:none}
+.stage svg{display:block;width:100%;height:auto;max-height:280px}
+
+/* Slider */
+.track{height:96px}
+.track .stop{position:absolute;top:50%;width:7px;height:7px;border-radius:50%;background:var(--copper);transform:translate(-50%,-50%);opacity:.85}
+.track .tine{position:absolute;top:14px;bottom:14px;width:4px;border-radius:2px;background:var(--brass);transform:translateX(-50%)}
+.tine.ringing{animation:ring .7s ease-out}
+@keyframes ring{0%,100%{transform:translateX(-50%)}10%{transform:translateX(-90%)}20%{transform:translateX(-10%)}30%{transform:translateX(-80%)}40%{transform:translateX(-20%)}55%{transform:translateX(-65%)}70%{transform:translateX(-40%)}}
+.mini{position:relative;height:30px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line)}
+.mini i{position:absolute;bottom:6px;width:2px;height:8px;border-radius:1px;background:var(--copper);transform:translateX(-50%)}
+.mini i.deep{width:4px;height:16px;bottom:5px;border-radius:2px}
+.mini i.opt{opacity:.4}
+.track .notch.deep{width:4px;height:18px;border-radius:2px;background:var(--copper);opacity:.9}
+.track .notch{position:absolute;bottom:5px;width:2px;height:11px;background:var(--muted);transform:translateX(-50%);opacity:.75;border-radius:1px}
+.plate{position:absolute;top:10px;bottom:10px;width:46%;z-index:1;left:2%;border-radius:12px;cursor:grab;display:flex;align-items:center;justify-content:center;
+  background:repeating-linear-gradient(90deg,transparent 0 3px,color-mix(in srgb,var(--fg) 6%,transparent) 3px 4px),linear-gradient(135deg,color-mix(in srgb,var(--ti) 55%,var(--surface-2)),color-mix(in srgb,var(--ti) 20%,var(--surface)));
+  border:1px solid color-mix(in srgb,var(--ti) 60%,var(--line));box-shadow:0 6px 18px rgba(0,0,0,.25);transition:left .22s cubic-bezier(.3,1.6,.5,1)}
+.plate.mech{background:repeating-linear-gradient(90deg,transparent 0 3px,color-mix(in srgb,var(--fg) 6%,transparent) 3px 4px),linear-gradient(135deg,color-mix(in srgb,var(--copper) 60%,var(--surface-2)),color-mix(in srgb,var(--copper) 25%,var(--surface)));border-color:color-mix(in srgb,var(--copper) 60%,var(--line));transition:left .12s ease-out}
+.plate.dragging{transition:none;cursor:grabbing}
+.plate span{font:600 .68rem var(--mono);letter-spacing:.14em;color:var(--fg);opacity:.8}
+
+/* Floating */
+.fbox{height:230px;overflow:hidden}
+.fplate{position:absolute;left:50%;top:50%;border-radius:16px;transform:translate(-50%,-50%)}
+.fbase{width:62%;height:120px;background:var(--surface-2);border:1px solid var(--line);opacity:.9}
+.mg{position:absolute;inset:0;pointer-events:none}
+.mg i{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--copper);transform:translate(-50%,-50%);box-shadow:0 0 0 2px color-mix(in srgb,var(--bg) 40%,transparent)}
+.fbase .mg i{opacity:.6}
+.ftop{width:50%;height:90px;cursor:grab;display:flex;align-items:center;justify-content:center;background:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.3px) 0 0/4px 4px,linear-gradient(135deg,color-mix(in srgb,var(--ti) 55%,var(--surface-2)),color-mix(in srgb,var(--ti) 22%,var(--surface)));border:1px solid color-mix(in srgb,var(--ti) 60%,var(--line));box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.ftop span{font:600 .68rem var(--mono);letter-spacing:.14em;opacity:.8}
+.readout{display:flex;gap:16px;flex-wrap:wrap}
+.readout div{display:grid;gap:2px}
+.readout b{font:600 1.1rem var(--mono);font-variant-numeric:tabular-nums}
+
+/* Clicker */
+.keys{display:flex;gap:14px;justify-content:center;padding:22px}
+.key{width:96px;height:96px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--surface-2));box-shadow:0 7px 0 var(--line),0 10px 18px rgba(0,0,0,.25);cursor:pointer;font:600 .72rem var(--mono);letter-spacing:.1em;color:var(--muted);transition:transform .06s,box-shadow .06s}
+.key.down{transform:translateY(5px);box-shadow:0 2px 0 var(--line),0 4px 10px rgba(0,0,0,.25)}
+.bubbles{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;padding:16px}
+.bub{aspect-ratio:1;max-width:100%;border-radius:50%;border:1px solid var(--line);cursor:pointer;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.4),transparent 45%),color-mix(in srgb,var(--ti) 35%,var(--surface-2));transition:transform .1s}
+.bub.popped{transform:scale(.82);background:var(--surface-2);box-shadow:inset 0 3px 6px rgba(0,0,0,.35)}
+
+/* Cards and grids */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.card p{color:var(--muted);font-size:.95rem}
+.card .feel{color:var(--fg)}
+.card .ex{font:500 .8rem var(--mono);color:var(--accent)}
+a.card{text-decoration:none;transition:transform .2s,border-color .2s}
+a.card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.card-top{display:flex;gap:12px;align-items:center}
+.card-top svg{width:44px;height:44px;flex:none}
+.go{font:600 .8rem var(--mono);color:var(--accent)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font:600 .66rem var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.noise{display:flex;gap:3px;align-items:end;height:14px}
+.noise i{width:4px;background:var(--line);border-radius:1px}
+.noise i.on{background:var(--accent)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.note{margin-top:20px;padding:16px 18px;border-left:3px solid var(--copper);background:var(--surface);border-radius:0 10px 10px 0;color:var(--muted);max-width:75ch}
+.note strong{color:var(--fg)}
+
+/* Anatomy */
+.anat{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:0 28px}
+.anat div{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;padding:14px 0;border-top:1px solid var(--line)}
+.anat .n{font:600 .75rem var(--mono);color:var(--accent);padding-top:3px}
+.anat h3{font-size:1rem}
+.anat p{grid-column:2;color:var(--muted);font-size:.93rem}
+
+/* Tuning rows */
+.tune{display:grid;gap:10px}
+.tune-row{display:grid;grid-template-columns:200px 1fr auto;gap:16px;align-items:center;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.tune-row h3{font-size:1rem}
+.tune-row p{color:var(--muted);font-size:.94rem}
+.tune-row a{font:600 .78rem var(--mono);color:var(--accent);text-decoration:none;white-space:nowrap}
+.tune-row a:hover{text-decoration:underline}
+@media (max-width:680px){.tune-row{grid-template-columns:1fr;gap:6px}}
+
+/* Play style chips */
+.styles{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.style{display:grid;gap:6px;padding:16px;border-top:2px solid var(--accent);background:var(--surface);border-radius:0 0 12px 12px;text-decoration:none}
+.style p{color:var(--muted);font-size:.92rem}
+.style:hover h3{color:var(--accent)}
+
+/* Examples */
+.ex-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ex-chip{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.92rem;transition:border-color .2s}
+.ex-chip:hover{border-color:var(--accent)}
+.ex-chip::after{content:"↗";font-family:var(--mono);color:var(--accent);font-size:.8rem}
+
+/* Pager */
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding-block:32px 48px}
+.pager a{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;text-decoration:none;background:var(--surface)}
+.pager a:hover{border-color:var(--accent)}
+.pager .next{text-align:right}
+.pager b{font:700 1.05rem var(--display)}
+
+/* Accordion */
+.acc{display:grid;gap:10px}
+.acc details{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.acc summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;gap:14px;font:700 1.1rem var(--display)}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary .pm{margin-left:auto;font:600 1.2rem var(--mono);color:var(--accent);transition:transform .2s}
+.acc details[open] .pm{transform:rotate(45deg)}
+.acc .body{padding:0 20px 18px 66px;color:var(--muted)}
+.acc .ico{width:32px;height:32px;flex:none}
+
+/* Materials */
+.swatches{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.sw{display:grid;justify-items:center;gap:6px;background:none;border:0;cursor:pointer;padding:4px}
+.disc{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font:600 .8rem var(--mono);color:#16181b;box-shadow:inset 0 -6px 10px rgba(0,0,0,.25),inset 0 4px 8px rgba(255,255,255,.35);border:2px solid transparent;transition:transform .2s,border-color .2s}
+.sw .nm{font-size:.78rem;color:var(--muted);max-width:76px;text-align:center;line-height:1.25}
+.sw[aria-pressed="true"] .disc{border-color:var(--fg);transform:translateY(-3px)}
+.sw[aria-pressed="true"] .nm{color:var(--fg)}
+.switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:500;margin-bottom:16px}
+.switch input{appearance:none;width:42px;height:24px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);position:relative;cursor:pointer;margin:0}
+.switch input::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:left .2s,background .2s}
+.switch input:checked{background:color-mix(in srgb,var(--accent) 35%,var(--surface-2))}
+.switch input:checked::after{left:20px;background:var(--accent)}
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:grid;gap:14px;min-width:0}
+.panel-head{display:flex;gap:14px;align-items:center}
+.panel-head .disc{width:44px;height:44px;font-size:.72rem}
+.facts{display:grid;gap:10px;margin:0}
+.facts div{display:grid;grid-template-columns:90px 1fr;gap:10px}
+.facts dt{font:600 .7rem/1.7 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:0}
+.weight-bar{display:grid;grid-template-columns:repeat(9,1fr);gap:4px}
+.sw-group{display:grid;gap:8px}
+.sw-row{display:flex;gap:10px;flex-wrap:wrap}
+.swatches{display:grid!important;gap:18px}
+.weight-bar i{height:8px;border-radius:2px;background:var(--surface-2)}
+.weight-bar i.on{background:var(--accent)}
+.weight-scale{display:flex;justify-content:space-between;font:500 .72rem var(--mono);color:var(--muted)}
+
+/* Finishes */
+.finish{padding:0;overflow:hidden;gap:0}
+.finish .tex{height:96px}
+.finish .txt{padding:14px;display:grid;gap:4px}
+.tex-stone{background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.18) 0 6%,transparent 7%),radial-gradient(circle at 70% 60%,rgba(0,0,0,.18) 0 9%,transparent 10%),radial-gradient(circle at 45% 80%,rgba(255,255,255,.12) 0 5%,transparent 6%),radial-gradient(circle at 85% 20%,rgba(0,0,0,.14) 0 7%,transparent 8%),linear-gradient(#8f9399,#7d8187)}
+.tex-blast{background:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.2px) 0 0/4px 4px,linear-gradient(#8a8e94,#83878d)}
+.tex-satin{background:repeating-linear-gradient(90deg,#9aa0a7 0 1px,#b9bec4 1px 3px,#a6abb1 3px 4px)}
+.tex-dlc{background:linear-gradient(135deg,#1c1d20,#33363b 55%,#1c1d20)}
+.tex-polish{background:linear-gradient(115deg,#6d7278 0%,#f2f3f5 38%,#9aa0a7 48%,#e7e9ec 62%,#70757b 100%)}
+.tex-colour{background:linear-gradient(120deg,#2f4f8f,#6a3d9a 30%,#c99a3b 55%,#2a7b86 78%,#1d1f24)}
+.tex-patina{background:radial-gradient(circle at 30% 40%,#4f8a74 0 18%,transparent 30%),radial-gradient(circle at 75% 70%,#5c3a24 0 22%,transparent 36%),linear-gradient(135deg,#c27a4b,#8a4b2c)}
+
+/* Hub sections */
+.hub-item{display:grid;gap:16px}
+.hub-item .points{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.applies{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.applies a{font-size:.88rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--surface)}
+.applies a:hover{border-color:var(--accent)}
+.hub-nav{display:flex;flex-wrap:wrap;gap:8px}
+.hub-nav a{font-size:.9rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--surface)}
+.hub-nav a:hover{border-color:var(--accent)}
+.safety{border-left-color:var(--warn)}
+
+/* Quiz */
+.quiz{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;gap:20px}
+.progress{display:flex;gap:6px}
+.progress i{flex:1;height:4px;border-radius:2px;background:var(--surface-2)}
+.progress i.on{background:var(--accent)}
+.q h3{font-size:clamp(1.3rem,3vw,1.7rem);margin-bottom:16px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.opt{text-align:left;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font:500 1rem var(--body);cursor:pointer;transition:border-color .2s,transform .2s}
+.opt:hover{border-color:var(--accent);transform:translateY(-2px)}
+.opt small{display:block;color:var(--muted);font-size:.85rem;margin-top:2px}
+.quiz-nav{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:10px;padding:10px 16px;font:600 .95rem var(--body);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.result{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start}
+.result p{color:var(--muted)}
+.result .tip{color:var(--fg)}
+.warnline{color:var(--warn);font-size:.92rem}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+table.ps{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+.ps th,.ps td{padding:10px 12px;border-top:1px solid var(--line);text-align:center}
+.ps thead th{border-top:0}
+.ps th[scope="row"],.ps thead th:first-child{text-align:left;font:600 .95rem var(--body)}
+.ps th[scope="row"] a{text-decoration:none}
+.ps th[scope="row"] a:hover{color:var(--accent)}
+.ps-h{background:none;border:0;cursor:pointer;font:600 .72rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:4px 6px;border-radius:6px}
+.ps-h.on,.ps-h:hover{color:var(--accent)}
+.tick{width:34px;height:34px;border-radius:50%;border:1px solid color-mix(in srgb,var(--accent) 50%,var(--line));background:color-mix(in srgb,var(--accent) 14%,var(--surface));color:var(--accent);font:700 1rem var(--body);cursor:pointer;transition:transform .15s,background .15s}
+.tick:hover,.tick.on{background:var(--accent);color:var(--on-accent);transform:scale(1.08)}
+.no{color:var(--line);font-size:1.2rem}
+.ps-detail{margin-top:16px;padding:16px 18px;background:var(--surface);border:1px solid var(--line);border-radius:12px;display:grid;gap:8px;min-height:72px}
+.ps-detail p{color:var(--muted)}
+.builder{display:grid;gap:8px;padding:12px 14px;border:1px dashed var(--line);border-radius:12px}
+.builder:empty{display:none}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.readouts:empty{display:none}
+.readouts div{display:grid;gap:4px}
+.bars{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.bars i{height:7px;border-radius:2px;background:var(--surface-2)}
+.bars i.on{background:var(--accent)}
+.setup{display:grid;gap:8px}
+.setup:empty{display:none}
+.code{font:500 .9rem var(--mono);padding:10px 12px;background:var(--bg);border:1px solid var(--line);border-radius:10px;user-select:all;-webkit-user-select:all;overflow-wrap:anywhere}
+.xsec{width:100%;height:auto;display:block}
+#a-materials-beadtable td,#a-materials-beadtable th{text-align:left}
+.pieces{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.piece{display:grid;grid-template-rows:auto 1fr;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;text-decoration:none;transition:transform .2s,border-color .2s}
+.piece:hover{transform:translateY(-3px);border-color:var(--accent)}
+.piece .ph{aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;align-content:center;gap:8px;background:linear-gradient(135deg,var(--surface-2),var(--bg));border-bottom:1px solid var(--line)}
+.piece .ph svg{width:64px;height:64px;opacity:.85}
+.piece .ph span{font:600 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.piece .ph img{width:100%;height:100%;object-fit:cover}
+.piece .pc{padding:14px 16px;display:grid;gap:6px;align-content:start}
+.piece .pc .tag{justify-self:start}
+.piece .pc p{color:var(--muted);font-size:.93rem}
+.taprow{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.taprow .label{flex:1 1 140px;text-align:center}
+.tapbtn{position:relative;display:inline-grid;place-items:center;min-width:52px;height:44px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:600 1rem var(--body);user-select:none;-webkit-user-select:none}
+.tapbtn:active,.tapbtn.hit{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 16%,var(--bg))}
+.tapsw{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:.01;cursor:pointer;z-index:2}
+.swwrap{position:relative;display:inline-grid}.swwrap.blk{display:grid}
+footer{padding-block:32px 48px;color:var(--muted);font-size:.88rem}
+</style>
+</head>
+<body>
+
+
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#start"><span class="screw" aria-hidden="true"></span>Fidget Toy Guide</a>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav id="mainNav" data-open="false" aria-label="Guide">
+      <ul class="nav-list">
+        <li><a href="#start" data-page="start">Start here</a></li>
+        <li class="has-drop"><button class="drop-btn" id="typesBtn" aria-expanded="false" aria-controls="typesDrop">Types <span>▾</span></button>
+          <ul class="drop" id="typesDrop" hidden></ul></li>
+        <li><a href="#materials" data-page="materials">Materials</a></li>
+        <li><a href="#tuning" data-page="tuning">Tuning &amp; feel</a></li>
+        <li><a href="#play-styles" data-page="play-styles">Play styles</a></li>
+        <li><a href="#find" data-page="find">What suits you</a></li>
+      </ul>
+    </nav>
+    <button class="icon-btn" id="soundToggle" aria-pressed="true" title="Turn demo sounds on or off">Sound on</button>
+  </div>
+</header>
+
+<main id="app">
+  <!-- START HERE -->
+  <div class="page" id="page-start">
+    <section class="hero">
+      <div class="wrap hero-grid solo">
+        <div class="hero-copy">
+          <span class="label">Start here</span>
+          <h1>Premium fidgets, <em>explained simply.</em></h1>
+          <p class="lead">Premium fidgets are precision-made objects you play with in one hand, usually machined from metal and held together by magnets, springs or a bearing. Three choices decide almost everything about how one feels.</p>
+          <div class="demo-row"><a class="btn" href="#start-types">Explore the types</a><a class="btn ghost" href="#materials">Learn the materials</a></div>
+        </div>
+      </div>
+      <div class="wrap" style="margin-top:36px">
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+          <a class="card" href="#start-types"><span class="label">01 · Type</span><h3>The motion your hand makes</h3><p>Do you want to flick, push, click, spin or roll?</p><span class="go">See the types →</span></a>
+          <a class="card" href="#start-how"><span class="label">02 · Mechanism</span><h3>The feedback you get back</h3><p>A magnetic snap, a mechanical click, or a long smooth spin?</p><span class="go">How they work →</span></a>
+          <a class="card" href="#materials"><span class="label">03 · Material</span><h3>How it feels and ages</h3><p>Weight, sound, feel, look and how it ages over time.</p><span class="go">Explore materials →</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="a-start-types">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Types</span><h2>What each one does</h2><p class="lead">Eight families of fidget. Tap any card to go deeper. <a href="#forks">Tuning forks</a>, a ringing feature found on several of them, have their own page.</p></div>
+        <div class="chips" role="group" aria-label="Filter types">
+          <button class="chip" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip" data-filter="quiet" aria-pressed="false">Quiet</button>
+          <button class="chip" data-filter="clicky" aria-pressed="false">Clicky</button>
+          <button class="chip" data-filter="pocket" aria-pressed="false">Pocket-friendly</button>
+        </div>
+        <div class="grid" id="typeGrid"></div>
+      </div>
+    </section>
+
+    <section id="a-start-how">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Mechanisms</span><h2>How they work</h2><p class="lead">Four mechanisms create most of the feedback, with friction tracks and tuning forks adding two more.</p></div>
+        <div class="acc">
+          <details open><summary><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 6v12a8 8 0 0 0 16 0V6h-6v12a2 2 0 0 1-4 0V6z" fill="none" stroke="var(--copper)" stroke-width="2"/><rect x="8" y="6" width="6" height="4" fill="var(--ti)"/><rect x="18" y="6" width="6" height="4" fill="var(--ti)"/></svg>Magnets<span class="pm">+</span></summary><div class="body">They pull parts into set positions for a snap or "homing" feel. Stronger magnets mean a firmer snap. <a href="#tuning-magnets">More on magnets →</a></div></details>
+          <details><summary><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 20h7l3-5 3 5h11" fill="none" stroke="var(--muted)" stroke-width="2"/><circle cx="14" cy="12" r="3.5" fill="var(--brass)"/><path d="M14 4v4" stroke="var(--brass)" stroke-width="2"/></svg>Mechanical clicks<span class="pm">+</span></summary><div class="body">Spring-loaded balls or pins drop into notches, much like the click of a pen. <a href="#tuning-springs">More on springs and clicks →</a></div></details>
+          <details><summary><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="var(--muted)" stroke-width="2"/><circle cx="16" cy="16" r="5" fill="none" stroke="var(--muted)" stroke-width="2"/><g fill="var(--ti)"><circle cx="16" cy="7.5" r="2.2"/><circle cx="24.5" cy="16" r="2.2"/><circle cx="16" cy="24.5" r="2.2"/><circle cx="7.5" cy="16" r="2.2"/></g></svg>Bearings<span class="pm">+</span></summary><div class="body">They let spinners and rings turn smoothly. Stainless and hybrid ceramic bearings are both common; full ceramic is an upgrade for a longer spin. <a href="#tuning-bearings">More on bearings →</a></div></details>
+          <details><summary><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="12" width="24" height="8" rx="3" fill="none" stroke="var(--muted)" stroke-width="2"/><rect x="8" y="10" width="9" height="12" rx="2" fill="var(--ti)"/></svg>Friction<span class="pm">+</span></summary><div class="body">A Teflon (PTFE) block clamps and slides along a track, giving smooth, even, damped travel instead of hard stops. <a href="#sliders-varieties">Friction sliders →</a></div></details>
+          <details><summary><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 4v11a5 5 0 0 0 10 0V4" fill="none" stroke="var(--brass)" stroke-width="2.5"/><path d="M16 20v8" stroke="var(--muted)" stroke-width="2.5"/></svg>Tuning forks<span class="pm">+</span></summary><div class="body">A metal fork that rings with a "ding" when something strikes it, found on sliders, floating sliders and spinners. <a href="#forks">Tuning forks →</a></div></details>
+          <details><summary><svg class="ico" viewBox="0 0 32 32" aria-hidden="true"><path d="M10 26h12M16 26v-4m-6-2 12-2-12-2 12-2-12-2 12-2" fill="none" stroke="var(--copper)" stroke-width="2"/><rect x="10" y="4" width="12" height="4" rx="2" fill="var(--brass)"/></svg>Springs<span class="pm">+</span></summary><div class="body">They return buttons and levers for a push-and-release click. <a href="#tuning-springs">More on springs →</a></div></details>
+        </div>
+        <p style="margin-top:22px;font-size:1.05rem;max-width:60ch">Collectors generally agree that a well-made fidget feels clean and identical every time, and that this precision is what separates premium pieces from cheap copies.</p>
+      </div>
+    </section>
+
+    <div class="wrap pager"><span></span><a class="next" href="#sliders"><span class="label">Next</span><b>Sliders →</b></a></div>
+  </div>
+
+  <!-- MATERIALS -->
+  <div class="page" id="page-materials" hidden>
+    <section class="hero"><div class="wrap hero-copy"><span class="label">Materials</span><h1>What it's <em style="font-style:normal;color:var(--accent)">made of.</em></h1><p class="lead">The material changes how a fidget feels, sounds and ages. This covers the toy itself, then the parts inside it and the accessories around it.</p>
+      <div class="hub-nav"><a href="#materials-body">Body materials</a><a href="#materials-plates">Plates and inserts</a><a href="#materials-finishes">Finishes</a><a href="#materials-choose">Choosing</a><a href="#materials-buttons">Buttons</a><a href="#materials-beads">Beads</a><a href="#materials-balls">Balls</a><a href="#materials-beadtable">Bead materials</a><a href="#materials-springs">Springs</a><a href="#materials-accessories">Accessories</a></div></div></section>
+    <section id="a-materials-body">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">The toy itself</span><h2>Body materials</h2><p class="lead">The mechanism stays the same; the material changes how heavy it feels, how it sounds and how it ages. Tap any material to see what it's made of and how it behaves, or compare two side by side.</p></div>
+        <label class="switch" for="compareToggle"><input type="checkbox" id="compareToggle">Compare two</label>
+        <div class="swatches" id="swatches" role="group" aria-label="Materials"></div>
+        <div class="panels" id="panels" aria-live="polite"></div>
+        <div class="styles" style="margin-top:22px">
+          <div class="style"><h3>Heavier = more momentum</h3><p>Heavier metals spin longer and land with a deeper, more solid impact; the snap itself comes from the magnets. Lighter ones suit all-day pocket carry.</p></div>
+          <div class="style"><h3>Heavier bodies ring lower</h3><p>Heavier bodies, and metals sound travels through more slowly, such as zirconium, ring lower and chunkier. Lighter titanium sounds brighter. Shape and what strikes what matter too.</p></div>
+          <div class="style"><h3>Mixed builds are common</h3><p>Many pieces pair materials, such as a titanium body with a copper plate or a steel body with brass.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="a-materials-plates">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">The toy itself</span><h2>Plates, tracks and inserts</h2><p class="lead">The parts inside a slider or spinner are often a different material from the body, chosen for how they move or sound.</p></div>
+        <div class="grid"><div class="card"><h3>PTFE (Teflon)</h3><p>Very low friction. Used for slide blocks, films and plates for smooth travel, and sold as spare stickers. Grit caught between plates scratches it easily.</p></div><div class="card"><h3>PEEK</h3><p>A tough engineering plastic used for tracks and impact plates, such as the impact plate in the Lautie Choc.</p></div><div class="card"><h3>PEI (Ultem)</h3><p>An amber, see-through plastic, among the lightest materials used, for bodies and plates.</p></div><div class="card"><h3>Sapphire windows</h3><p>Clear, scratch-resistant windows offered on some pieces so you can see inside.</p></div><div class="card"><h3>Accent plates</h3><p>Decorative plates in contrasting or patterned metals; some are held by magnets and swap out.</p></div></div>
+      </div>
+    </section>
+    <section id="a-materials-finishes">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Finishes</span><h2>The surface on top</h2><p class="lead">The finish mostly changes grip and how well marks hide.</p></div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr))">
+          <div class="card finish"><div class="tex tex-stone"></div><div class="txt"><h3>Stonewashed</h3><p>A matte, tumbled look that hides scratches best.</p></div></div>
+          <div class="card finish"><div class="tex tex-blast"></div><div class="txt"><h3>Blasted</h3><p>An even, flat matte with good grip.</p></div></div>
+          <div class="card finish"><div class="tex tex-satin"></div><div class="txt"><h3>Satin</h3><p>Fine brushed lines with a soft sheen: cleaner than stonewashed, less shiny than polished.</p></div></div>
+          <div class="card finish"><div class="tex tex-polish"></div><div class="txt"><h3>Polished</h3><p>Shiny; looks great but shows every mark and fingerprint.</p></div></div>
+          <div class="card finish"><div class="tex tex-colour"></div><div class="txt"><h3>Coloured</h3><p>Anodised or heat-coloured titanium, or heat-treated black zirconium, in blues, purples, golds, black or "oil slick".</p></div></div>
+          <div class="card finish"><div class="tex tex-dlc"></div><div class="txt"><h3>DLC</h3><p>A thin, hard black coating that resists scratches; it can still wear through on edges over years.</p></div></div>
+          <div class="card finish"><div class="tex tex-patina"></div><div class="txt"><h3>Patina</h3><p>Copper and brass darken naturally with use.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="a-materials-choose">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Choosing</span><h2>Pick by what you want</h2></div>
+        <div class="tbl"><table class="ps"><thead><tr><th scope="col">You want</th><th scope="col">Look at</th></tr></thead><tbody>
+          <tr><th scope="row">A first premium piece</th><td>Titanium; stainless steel if you like crisper, heavier feedback</td></tr>
+          <tr><th scope="row">Smooth and light</th><td>Titanium, aluminium, POM or PEEK</td></tr>
+          <tr><th scope="row">Heavy and dense</th><td>Copper, brass, stainless steel, tungsten copper or tungsten</td></tr>
+          <tr><th scope="row">Easy pocket carry</th><td>Titanium, aluminium, PEEK or G10</td></tr>
+          <tr><th scope="row">Something that changes with use</th><td>Copper, brass or bronze</td></tr>
+          <tr><th scope="row">Colour and pattern</th><td>Anodised titanium, Timascus, Mokuti or Zircuti</td></tr>
+          <tr><th scope="row">Something to collect</th><td>Mokuti, Zircuti, black zirconium or superconductor</td></tr>
+        </tbody></table></div>
+        <p class="muted" style="margin-top:10px">Weight isn't everything: the magnets, plates and how the toy is built change the feel and sound as much as the metal does. On spinners, a denser rim keeps them going for longer.</p>
+      </div>
+    </section>
+    <section id="a-materials-buttons">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Parts</span><h2>Buttons and caps</h2><p class="lead">On spinners and rings, the buttons are the parts you pinch or hold.</p></div>
+        <div class="grid"><div class="card"><h3>They don't spin</h3><p>Buttons stay still in your grip while the body turns, so their material changes look, weight in the hand and grip more than spin time.</p></div><div class="card"><h3>Matching or contrasting</h3><p>Often the same metal as the body, or a contrast such as brass, copper or zirconium.</p></div><div class="card"><h3>Exotic buttons</h3><p>Patterned metals such as Mokuti are a popular upgrade on high-end spinners.</p></div><div class="card"><h3>Shape</h3><p>The shape and size of the button change how it sits between your fingers.</p></div></div>
+      </div>
+    </section>
+    <section id="a-materials-beads">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Parts</span><h2>Beads</h2><p class="lead">Beads turn up in beaded spinners, on lanyards and as pendants.</p></div>
+        <div class="grid"><div class="card"><h3>Beaded spinners</h3><p>Beads installed in the space round the bearing or in the body. Options can include stainless steel, ceramic, titanium and ruby.</p></div><div class="card"><h3>Spacers</h3><p>Small plastic or metal spacers sit between beads on some designs.</p></div><div class="card"><h3>Lanyard beads and pendants</h3><p>Decorative beads threaded on a lanyard or worn as a pendant; a category of their own at many shops.</p></div><div class="card"><h3>Rule of thumb</h3><p>Harder, heavier beads tend to sound sharper and louder; lighter ones are softer and quieter.</p></div></div>
+      </div>
+    </section>
+    <section id="a-materials-balls">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Parts</span><h2>Balls</h2><p class="lead">Small balls do three different jobs: they make clicks, strike forks and carry bearings.</p></div>
+        <div class="grid"><div class="card"><h3>Click balls</h3><p>In mechanical sliders, a spring pushes a ball or bead into notches. Zirconia ceramic is common, and size matters: one slider takes 3 mm and 3.175 mm beads for different feels.</p></div><div class="card"><h3>Strikers</h3><p>In tuning-fork pieces, balls or beads hit the fork. Hard zirconia feels bouncy; POM plastic gives a clearer ring. Steel balls are used in some fork spinners.</p></div><div class="card"><h3>Bearing balls</h3><p>Steel balls in standard bearings, ceramic balls in hybrid and full ceramic bearings.</p></div></div>
+      </div>
+    </section>
+    <section id="a-materials-beadtable">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Parts</span><h2>Bead and ball materials compared</h2><p class="lead">The material of a click bead or ball changes its weight and how it sounds. Weights are for the same size of bead.</p></div>
+        <div class="tbl"><table class="ps"><thead><tr><th scope="col">Material</th><th scope="col">Kind</th><th scope="col">Weight (density, g/cm³)</th><th scope="col">Sound</th></tr></thead><tbody>
+          <tr><th scope="row">Silicon nitride</th><td>Ceramic</td><td>Lightest hard bead (3.2)</td><td>Bright and high</td></tr>
+          <tr><th scope="row">Zirconia</th><td>Ceramic</td><td>Medium (6.0)</td><td>Bright and crisp</td></tr>
+          <tr><th scope="row">Steel</th><td>Metal</td><td>Heavier (7.9)</td><td>Bright, a little fuller</td></tr>
+          <tr><th scope="row">Tungsten carbide</th><td>Hard metal</td><td>Heaviest (15.6)</td><td>Lower and weightier</td></tr>
+          <tr><th scope="row">POM</th><td>Plastic</td><td>Very light (1.4)</td><td>Soft, dull and quiet</td></tr>
+          <tr><th scope="row">PTFE</th><td>Plastic</td><td>Light (2.2)</td><td>Soft and quiet, with the lowest friction</td></tr>
+        </tbody></table></div>
+        <p class="hint" style="margin-top:12px"><a href="#sliders">Hear the difference in the Sliders demo →</a></p>
+      </div>
+    </section>
+    <section id="a-materials-springs">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Parts</span><h2>Springs</h2><p class="lead">The spring under a click bead sets how firm the click is.</p></div>
+        <div class="grid"><div class="card"><h3>Steel or bronze</h3><p>Steel springs are the norm. Phosphor-bronze springs are about half as stiff for the same size and ring lower. Gold-plated stainless springs are common in spare kits.</p></div><div class="card"><h3>Size sets stiffness</h3><p>Stiffness rises very steeply with wire thickness, and more coils make a spring softer. Plating or colour makes no difference.</p></div><div class="card"><h3>Wear</h3><p>Springs soften with use; a fresh one brings a mushy click back.</p></div></div>
+      </div>
+    </section>
+    <section id="a-materials-accessories">
+      <div class="wrap">
+        <div class="sec-head"><span class="label">Accessories</span><h2>Accessories</h2><p class="lead">The extras around a fidget, for carrying it, protecting it and tuning it.</p></div>
+        <div class="grid"><div class="card"><h3>Lanyards and paracord</h3><p>Many pieces have a lanyard hole for a cord or loop.</p></div><div class="card"><h3>Pouches and cases</h3><p>Protect pieces from scratches and pocket grit.</p></div><div class="card"><h3>Tuning kits</h3><p>Washers, spare magnets, springs and beads for changing the feel.</p></div><div class="card"><h3>Spare parts</h3><p>Teflon stickers, rubber pads, plates and bearings.</p></div><div class="card"><h3>Tools</h3><p>Magnet pullers and holders for lifting magnets out when tuning.</p></div></div>
+      </div>
+    </section>
+
+    <div class="wrap pager"><a href="#skill-toys"><span class="label">Previous</span><b>← Skill Toys</b></a><a class="next" href="#tuning"><span class="label">Next</span><b>Tuning &amp; feel →</b></a></div>
+  </div>
+</main>
+<footer><div class="wrap">Fidget Toy Guide · for people exploring premium fidgets. Demo sounds and spin times are illustrative.</div></footer>
+
+<script>
+/* ---------- Icons ---------- */
+const ICON={
+  sliders:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="14" width="36" height="20" rx="6" fill="none" stroke="var(--muted)" stroke-width="2"/><rect x="8" y="16" width="18" height="16" rx="4" fill="var(--ti)"/><g fill="var(--brass)"><circle cx="31" cy="24" r="2"/><circle cx="37" cy="24" r="2"/></g></svg>',
+  floating:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="26" width="32" height="10" rx="4" fill="none" stroke="var(--muted)" stroke-width="2"/><rect x="12" y="12" width="26" height="10" rx="4" fill="var(--ti)"/><path d="M14 24h4m6 0h4m6 0h4" stroke="var(--brass)" stroke-width="2" stroke-dasharray="2 2"/></svg>',
+  spinners:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="17" fill="none" stroke="var(--muted)" stroke-width="2"/><circle cx="24" cy="24" r="6" fill="var(--brass)"/><path d="M24 7a17 17 0 0 1 15 9" fill="none" stroke="var(--ti)" stroke-width="3" stroke-linecap="round"/></svg>',
+  coins:'<svg viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="30" rx="16" ry="6" fill="none" stroke="var(--muted)" stroke-width="2"/><ellipse cx="24" cy="24" rx="16" ry="6" fill="none" stroke="var(--muted)" stroke-width="2"/><ellipse cx="26" cy="18" rx="16" ry="6" fill="var(--brass)"/></svg>',
+  rings:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="15" fill="none" stroke="var(--brass)" stroke-width="6"/><circle cx="24" cy="24" r="15" fill="none" stroke="var(--bg)" stroke-width="1.5" stroke-dasharray="3 4"/></svg>',
+  clickers:'<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="18" width="36" height="16" rx="5" fill="none" stroke="var(--muted)" stroke-width="2"/><g fill="var(--copper)"><circle cx="15" cy="26" r="4"/><circle cx="24" cy="26" r="4"/><circle cx="33" cy="26" r="4"/></g><path d="M24 8v5" stroke="var(--brass)" stroke-width="2"/></svg>',
+  forks:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 6v18a6 6 0 0 0 12 0V6" fill="none" stroke="var(--brass)" stroke-width="4" stroke-linecap="round"/><path d="M24 30v12" stroke="var(--muted)" stroke-width="4" stroke-linecap="round"/><path d="M36 12c3 3 3 9 0 12M40 9c5 5 5 13 0 18" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>',
+  multi:'<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16" fill="none" stroke="var(--muted)" stroke-width="2"/><rect x="14" y="19" width="20" height="10" rx="4" fill="var(--ti)"/><circle cx="24" cy="24" r="3" fill="var(--brass)"/></svg>',
+  'skill-toys':'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 30c4-14 16-14 20 0" fill="none" stroke="var(--muted)" stroke-width="2"/><circle cx="14" cy="32" r="5" fill="var(--copper)"/><circle cx="34" cy="32" r="5" fill="var(--brass)"/></svg>'
+};
+
+/* ---------- Content ---------- */
+const STYLE={
+  rhythm:{n:'Rhythm',s:'Repeat one motion and fall into its beat.'},
+  flow:{n:'Flow',s:'Smooth, continuous movement with no hard stops.'},
+  discreet:{n:'Discreet',s:'Quiet, one-handed and low-key for calls and meetings.'},
+  show:{n:'Show',s:'Watching it move and change is half the fun.'},
+  skill:{n:'Skill',s:'Learn moves and tricks that get better with practice.'}
+};
+const PIECES={"sliders": [["Lautie Choc", "Mechanical", "A spring bead runs over a segmented track inside a screwless shell.", "https://lautie.com/product/choc-fidget-slider/"], ["MOT Groove", "Friction track", "A Teflon (PTFE) block gives smooth, damped travel.", "https://geeone.com/products/groove-slider-1"], ["Mackie CP3", "Multi-layer magnetic", "Three layers that click against each other, with a limit post.", "https://geeone.com/products/cp3-slider"]], "floating": [["Peacock Aura Sand", "6 + 8 layout", "A common inner and outer magnet layout, held by magnets alone.", "https://nxedc.com/products/aura-sand-free-floating-fidget-slider"], ["77 EDC Double Seven", "Adjustable layout", "A flip plate, gap plates, spare magnets and a removable brass fork.", "https://nxedc.com/products/double-seven"]], "forks": [["JUZHEDC Ripple", "Bead-struck", "Swappable beads strike the fork: zirconia feels bouncy, POM rings clearer.", "https://geeone.com/products/ripple-tuning-fork-slider"], ["JX EDC Chime Roll", "Fork slider", "Damped part-way, then the fork rings at full stroke.", "https://geeone.com/products/chime-roll"], ["JUZHEDC Ling Yin", "Fork spinner", "Steel balls strike the fork as it spins.", "https://nxedc.com/products/ling-yin"]], "spinners": [["Lautie BIT05", "Beaded", "Space for up to nine beads, which add sound and feel as it spins.", "https://lautie.com/product/bit-05-fidget-spinner/"], ["LARK EDC Worm Hole", "Open armour", "Armour plates swing open as it speeds up.", "https://geeone.com/products/worm-hole-opening-armor-spinner"], ["Alchemy Studio Sinan", "Escapement", "A balance wheel and escapement on one axis, with several play modes.", "https://geeone.com/products/sinan"]], "coins": [["ACEdc CORE", "Spin coin", "A mechanical haptic coin that also spins.", "https://geeone.com/products/core"]], "rings": [["Lautie Mechanic-C", "Magnetic ring", "0 to 8 magnets change the mode from smooth to a crisp clack.", "https://trb-creation.com/products/lautie-mechanic-c-spy-ring-spinner"], ["Lautie Mechanic-I", "Bearing-less", "A ring that does away with bearings.", "https://lautie.com/product-category/all-products/spywars-series/"]], "clickers": [["Lautie Puffercrash", "Bubble-wrap", "Rows of domes that pop and reset.", "https://www.google.com/search?tbm=isch&q=Lautie+Puffercrash"]], "multi": [["MOT OWL", "Push + coin + rotor", "A direct-push slider, haptic coin and magnetic rotor in one.", "https://geeone.com/products/owl-1"], ["FidgetThings Chill Pill", "Roll, slide and click", "Two magnetic halves that roll, slide and click apart.", "https://www.google.com/search?tbm=isch&q=FidgetThings+Chill+Pill"]], "skill-toys": [["Aroundsquare begleri", "Begleri", "Two beads on a short cord, made for tricks.", "https://www.google.com/search?tbm=isch&q=Aroundsquare+begleri+titanium"]]};
+const MENU=()=>TYPES.filter(t=>!t.feature);
+const HUBNAME={sound:'Why it sounds that way',tools:'Tuning tools',forks:'Tuning forks',magnets:'Magnets',springs:'Springs & clicks',bearings:'Bearings',weight:'Weight & balance',size:'Size & ergonomics',surface:'Surface & texture',build:'Build & tolerances',swaps:'Swaps & parts',care:'Care'};
+
+const TYPES=[
+{key:'sliders',name:'Sliders',short:'A plate on a track that snaps, clicks or glides between stops.',noise:2,nl:'Low to loud',tags:['quiet','clicky','pocket'],demo:'slider',
+ tagline:'A plate on a track that moves to set positions.',
+ intro:'Sliders are the most popular premium fidget. A plate moves along a guide or track and stops at set points, using magnets, a spring-loaded bead, a friction block or a mix. Small changes to any of these change the feel completely.',
+ facts:[['Noise','Low to loud'],['Carry','Pocket-friendly'],['Styles','Rhythm, discreet']],
+ varieties:[
+  ['Magnetic','Magnets set the stops along the track. Versions with two or three clicks are common.','A clean snap at each stop.'],
+  ['Multi-layer magnetic','Three layered plates or "cards" slide against each other.','More clicks and a fuller sound; some can be loud.'],
+  ['Mechanical','A spring-loaded bead runs over notches in a track. The track pattern, such as paragraph, long slide or dense, sets the feel.','Clicks you feel and hear, often in both directions. See the tracks below.'],
+  ['Friction (PTFE) track','A Teflon (PTFE) block clamps and slides along the track. Some add spring-ball clicks on top.','Smooth, even, damped travel.'],
+  ['Tuning fork','A metal fork rings when the plate hits the end of its stroke.','A snap or click with a ring on top. See Tuning Forks.']
+ ],
+ anatomy:[['Body','The frame you hold; sets the size and weight.'],['Slide plate','The part your thumb moves.'],['Track or guide','Rails, grooves or a limit post that keep the plate on its path.'],['Magnets','Set the stops on magnetic sliders, or hold a screwless shell together.'],['Bead and spring','Make the click on mechanical sliders.'],['Impact plate','A hard plate, such as PEEK, that the slider strikes at each end.'],['Fasteners','Screws, interlocks or magnets that hold it together.']],
+ tuning:[
+  ['Magnet strength','Stronger magnets pull earlier, snap harder, sound louder and need more push. Softer ones are gentler and quieter.','magnets'],
+  ['Number of clicks','More stops give a faster rhythm of smaller snaps; fewer give bigger, slower ones.','magnets'],
+  ['Beads and springs','Bead material, bead weight and spring stiffness set how bright, heavy and loud each click is. Many mechanical sliders take swap beads and springs. Try them in the demo.','sound'],
+  ['PTFE and lubrication','Teflon blocks or stickers smooth the travel; some makers sell them as spares.','swaps'],
+  ['Inner plates','Some designs, like the Lautie Choc, let you swap inner plates to change the feel.','swaps'],
+  ['Plate weight and material','Heavier plates add momentum and a deeper, more solid impact.','weight'],
+  ['Plate texture','Ripples or grooves add grip and a different feel under the thumb.','surface'],
+  ['Tuning fork','Some sliders add a fork that rings at the end of the stroke.','forks'],
+  ['Tolerances','A tight fit means no wobble or rattle; a looser one has more play.','build']
+ ],
+ tracks:[['Paragraph','Deep, evenly spaced notches with a short smooth stretch between each.','A pronounced click, a short slide, then the next click.',Array.from({length:7},(_,i)=>i/6),'deep'],['Long slide','A long, smooth groove with a notch at each end. Some also have a notch in the middle.','One long glide between clicks.',[0,.5,1],'deep',.5],['Dense','Shallow notches packed tightly together along the track.','A fast, fine, continuous run of light clicks.',Array.from({length:25},(_,i)=>i/24),'']],
+ play:[['rhythm','Repeating snaps or clicks you can fall into.'],['discreet','One thumb, and quiet enough for calls with softer magnets or a friction track.']],
+ examples:['Lautie Choc','WM EDC Q','MOT Groove','Mackie CP3','Magnus Turtle','Lautie Shuffle V3']},
+
+{key:'floating',name:'Floating Sliders',short:'Two trackless plates held by magnets that click between set positions.',noise:2,nl:'Moderate; louder when swung',tags:['pocket'],demo:'floating',
+ tagline:'Two plates, no track, held together by magnets alone.',
+ intro:'Floating sliders, also called free-floating or infinite-position sliders, have no rails or grooves. Two plates are held together only by magnets, so the top plate can move freely and clicks into set positions where the magnets line up. The magnet layout on each plate decides how many clicks you get and how it plays.',
+ facts:[['Noise','Moderate; louder when swung'],['Carry','Pocket-friendly'],['Styles','Rhythm, skill']],
+ varieties:[
+  ['3-click (8 × 8)','Eight magnets on each plate, centralised on both sides.','Three click positions. 3-click sliders don\'t currently offer a 2-click option.'],
+  ['2-click (8 × 6), "fancy play"','Eight magnets on one plate pushed to the very corners, with six centralised on the other.','Two click positions and more freedom to move, which suits tricks. Most can be tuned to 3-click.'],
+  ['Tuning fork','A fork module rings when the plates hit.','Clicks with a ring on top. See Tuning Forks.'],
+  ['Add-ons','A few designs add a middle plate or a handle.','More travel, or a steadier grip.']
+ ],
+ anatomy:[['Top plate','The plate your thumb pushes.'],['Base plate','The plate it sits on.'],['Magnet inserts','The pockets in each plate that hold the magnets.'],['Magnet layout','How many magnets sit on each plate, and where: corners or centralised.'],['Gap','The space between the plates; some designs include plates to adjust it.'],['Low-friction film','A thin Teflon (PTFE) layer on some plates for a smoother glide.']],
+ tuning:[
+  ['Click count','8 × 8 gives three clicks; 8 × 6 gives two. Most 2-click sliders can be retuned to 3-click, but not the other way round.','magnets'],
+  ['Magnet position','On 3-click sliders the magnets are centralised on both plates. On 2-click sliders the eight are pushed to the corners and the six are centralised.','magnets'],
+  ['Washers','Some tuning kits include washers that sit under the magnets to weaken the pull.','tools'],
+  ['Magnet grade and size','Grades from N25 up to N52 are used; higher grades and bigger magnets pull harder.','magnets'],
+  ['Gap between plates','A bigger gap weakens the pull; a smaller one strengthens it.','magnets'],
+  ['Pads','Rubber pads on some designs soften the pull.','swaps'],
+  ['Keeping plates clean','Debris caught between the plates will damage them, especially Teflon plates.','care']
+ ],
+ play:[['rhythm','Clicking between positions.'],['skill','2-click "fancy play" sliders are made for tricks and swinging.']],
+ examples:['Peacock Aura Sand','JUZHEDC Advanced','77 EDC Double Seven','JUZHEDC Vocal Range']},
+
+{key:'forks',feature:true,name:'Tuning Forks',short:'A built-in metal fork that rings when struck, found on sliders, floating sliders and spinners.',noise:4,nl:'Rings by design',tags:['clicky'],demo:'fork',
+ tagline:'Push, strike, ring: a fidget with a built-in bell.',
+ intro:'A tuning-fork fidget has a metal fork or tine inside. A bead, plate or ball strikes it, usually at the end of a stroke, and it rings with a "ding" you hear and feel in your fingers. It\'s a feature rather than a type of its own, so you\'ll find it on sliders, floating sliders and spinners. They aren\'t meeting-friendly at full stroke, though some can be played part-way for a quieter feel.',
+ facts:[['Noise','Rings by design'],['Found on','Sliders, floating sliders, spinners'],['Styles','Rhythm, show']],
+ varieties:[
+  ['Mechanical fork slider','A spring bead runs in grooves for clicks, and the fork rings at the end of travel.','Clicks along the way, then a ring.'],
+  ['Magnetic fork slider','Magnets snap the plate to its stops, and the impact strikes the fork.','A magnetic snap with a ring on top.'],
+  ['Bead-struck','Swappable beads strike the fork.','Bouncy or clear, depending on the bead material.'],
+  ['Pole-switch','Flipping the magnet poles changes the mode, such as a sharp eject or a soft spring.','Two feels in one piece.'],
+  ['Floating fork','Trackless magnetic plates with a fork module added.','Clicks into position with a ring.'],
+  ['Fork spinner','Balls collide with a fork as it spins.','A ringing, chiming spin.'],
+  ['Hybrid','A fork combined with a spinner, ratchet or other modes.','Several feels, with a ring.']
+ ],
+ anatomy:[['Body','The shell; on some designs, open windows help the sound carry.'],['Fork','The metal tine or "liner" that rings, often a separate layer.'],['Striker','The bead, plate edge, ball or magnet stop that hits the fork.'],['Magnets or spring bead','Set the stops and how hard it strikes.'],['Slide plate','The moving part on fork sliders.']],
+ tuning:[
+  ['Fork material','Titanium, brass, zirconium and stainless steel forks are all sold, some as swap parts. As a rough guide, steel and titanium ring higher, and brass and zirconium lower and warmer.','forks'],
+  ['Striker material','On one design, hard zirconia beads feel bouncy while POM plastic beads give a clearer ring.','forks'],
+  ['Stroke speed','A quick push gives a long, lingering ring; slow pushes give separate dings.','forks'],
+  ['Grip','Touching the fork mutes it. Some designs build the fork in so your hand can\'t damp it.','forks'],
+  ['Magnet strength and poles','Set how hard the striker hits.','magnets'],
+  ['Removable forks','Some forks lift out to swap or remove; others are fitted tightly and not meant to come apart.','swaps']
+ ],
+ play:[['rhythm','Slow, separate dings.'],['show','A full stroke and a long ring.']],
+ examples:['JUZHEDC Ripple','MOT Feng Ling','JX EDC Chime Roll','DJG Spirit','WANWU Popping','JUZHEDC Ling Yin']},
+
+{key:'spinners',name:'Spinners',short:'A family of bearing-based pieces, from classic bars to transforming armour.',noise:0,nl:'Near silent to chiming',tags:['quiet'],demo:'spinner',
+ tagline:'Not every spinner is just a spinner.',
+ intro:'Spinners all turn on a bearing, but what spins, and what happens as it spins, varies hugely. Some just spin long and smooth. Others open up at speed, carry loose beads, ring a tuning fork, or run watch-style mechanisms.',
+ facts:[['Noise','Near silent to chiming'],['Carry','Most pocket, some desk'],['Styles','Flow, show, rhythm, skill']],
+ varieties:[
+  ['Bar','A two-lobed bar spins round a central bearing.','A long, steady spin with gyroscopic pull.'],
+  ['Tri-arm','Three arms or lobes spin round one bearing.','A balanced spin in the classic shape.'],
+  ['Ball / spherical','A hollow sphere spins round fixed side caps you hold.','Harder to start, spins longer; grooves help you grip and flick it.'],
+  ['Beaded','Has space round the bearing, or in the body, where beads can be installed.','The loose beads add sound and feel as it spins.'],
+  ['Open armour','Armour plates stay closed at low speed and open as it speeds up.','Compact at rest, then visibly unfolds with a firm open-close feel.'],
+  ['Tuning fork','Balls collide with a built-in fork as it spins.','A ringing, chiming spin. See Tuning Forks.'],
+  ['Mechanism / escapement','Watch-style parts, such as a balance wheel and escapement, turn together.','Several play modes in one piece.']
+ ],
+ anatomy:[['Bearing','Lets the body turn round a fixed centre. R188 is common; other sizes suit specific designs.'],['Buttons / caps','The parts you pinch; they stay still while the body spins.'],['Body halves','Pressed together (interference fit) or screwed together.'],['Rim mass','Weight out at the edge, which keeps it spinning.'],['Bead space','On beaded spinners, the space round the bearing or in the body where beads are installed.'],['Armour plates','Moving outer plates on open-armour designs.'],['Fork','On fork spinners, the tine that the balls strike.'],['Escapement','Watch-style parts that add movement and modes.']],
+ tuning:[
+  ['Bearing','Stainless, hybrid ceramic or full ceramic change spin time, smoothness and noise.','bearings'],
+  ['Material','More weight means more momentum; titanium feels light, zirconium and steel heavier.','weight'],
+  ['Rim weight','More mass at the edge means a longer spin and a stronger pull, but it takes more effort to start.','weight'],
+  ['Beads','On beaded spinners, the number and material of the beads you install change the sound and feel.','swaps'],
+  ['Armour mass','More armour mass lowers the speed at which it opens.','weight'],
+  ['Caps and buttons','Change grip and how it sits in the fingers.','size'],
+  ['Cleaning and lubrication','A dry bearing spins longer but louder; a lubricated one is quieter.','bearings'],
+  ['Construction','A press-fit body has less wobble; a screwed body is easier to open.','build']
+ ],
+ play:[['flow','Bar, tri-arm and ball spinners for long, quiet spins.'],['show','Open armour, fork and escapement pieces you watch and hear.'],['rhythm','Beaded spinners, where the beads add sound as it turns.'],['skill','Spinners built for tricks and transfers.']],
+ examples:['Torqbar','Lautie ROC OG','Lautie Mini Dealer','Lautie Noiz','Lautie BIT05','LARK EDC Worm Hole','JUZHEDC Ling Yin','Alchemy Studio Sinan']},
+
+{key:'coins',name:'Haptic Coins',short:'Stacked magnetic discs that click between positions.',noise:3,nl:'Soft to loud',tags:['clicky','pocket'],demo:'coin',
+ tagline:'Discs held by magnets that click as you twist or slide.',
+ intro:'A haptic coin is two or more discs held together by magnets. Twist or slide the top disc and it snaps from one magnet position to the next. They\'re compact enough to live in a pocket and work with one thumb.',
+ facts:[['Noise','Soft to loud'],['Carry','Pocket-friendly'],['Styles','Rhythm, discreet']],
+ varieties:[
+  ['Twist coin','The top disc turns round a centre.','Clicks at each magnet position as you rotate.'],
+  ['Slide coin','The top disc slides across a grid of magnets.','Snaps in any direction, not just round.'],
+  ['Spin coin','Doubles as a spinner when flicked.','Click play and spin play in one.']
+ ],
+ anatomy:[['Base disc','The bottom layer that holds the main magnets.'],['Top disc','The layer you twist or slide.'],['Magnets','A ring or grid that sets every position.'],['Edge','Knurling or texture for grip.']],
+ tuning:[
+  ['Magnet count','More magnets give more, smaller clicks per turn; fewer give bigger, slower snaps.','magnets'],
+  ['Magnet strength','Stronger magnets give a louder snap and need more effort.','magnets'],
+  ['Diameter and thickness','Bigger coins are easier to grip; thinner ones carry better.','size'],
+  ['Disc weight and material','Heavier discs give a deeper, firmer click.','weight'],
+  ['Edge texture','Changes grip and feel under the thumb.','surface']
+ ],
+ play:[['rhythm','Click after click as you turn it.'],['discreet','Fits in a closed hand or pocket.']],
+ examples:['ACEdc CORE']},
+
+{key:'rings',name:'Rings',short:'Worn on a finger; spin, click or trick with the outer band.',noise:1,nl:'Low',tags:['quiet','pocket'],demo:'ring',
+ tagline:'Worn on a finger, with an outer band you spin or click with your thumb.',
+ intro:'Fidget rings are always with you. The outer band turns on a bearing or without one, and some add magnets or teeth for clicks. Others are sets you link together and do tricks with.',
+ facts:[['Noise','Low'],['Carry','Worn'],['Styles','Discreet, rhythm, skill']],
+ varieties:[
+  ['Spinner ring','A smooth outer band turns on a bearing.','A quiet, continuous spin.'],
+  ['Magnetic ring','Magnets inside change the feel as it turns.','From smooth, to a dense ratchet, to a crisp clack, depending on the magnets.'],
+  ['Bearing-less ring','The band turns without a bearing.','A slower, more damped turn.'],
+  ['Ratchet ring','Clicks as the band turns.','Rhythmic ticks under the thumb.'],
+  ['Linked rings','Several rings that attach magnetically.','Tricks and transfers between rings.']
+ ],
+ anatomy:[['Inner band','Sits on your finger and stays still.'],['Outer band','The part you turn.'],['Bearing','A bearing spins freely; bearing-less designs have more friction.'],['Magnets','Add haptic feel on magnetic rings.']],
+ tuning:[
+  ['Magnet count','On the Lautie Mechanic-C: none spins smoothly, 1–2 gives a dense ratchet, 3–5 a bead-like tick, and 6–8 a crisp clack.','magnets'],
+  ['Bearing or none','A free, long spin versus a slower, damped turn.','bearings'],
+  ['Band width','Wider bands are easier to turn; narrow ones are subtler.','size'],
+  ['Fit','Too loose and it slips round; too tight and it\'s hard to turn.','size'],
+  ['Material','Heavier metals keep turning longer.','weight']
+ ],
+ play:[['discreet','Always on hand and barely noticeable.'],['rhythm','Magnetic and ratchet rings tick as they turn.'],['skill','Linked rings are made for tricks.']],
+ examples:['Lautie Mechanic-C','Lautie Mechanic-I','Fingears']},
+
+{key:'clickers',name:'Clickers',short:'Spring-loaded buttons and switches for pen-clickers.',noise:4,nl:'Moderate to loud',tags:['clicky'],demo:'clicker',
+ tagline:'Spring-loaded buttons for people who click pens.',
+ intro:'Clickers give you a button to press, over and over. The feel comes from the switch or spring underneath, so two clickers that look alike can sound completely different.',
+ facts:[['Noise','Moderate to loud'],['Carry','Most are pocket-friendly'],['Styles','Rhythm']],
+ varieties:[
+  ['Single button','One large button.','A simple, repeatable press.'],
+  ['Multi-button','Several buttons in a row or grid.','Patterns and combinations.'],
+  ['Switch-based','Keyboard-style switches under each key.','Choose a linear, tactile or clicky feel.'],
+  ['Bubble-wrap','Rows of domes that pop and reset.','The feel of popping bubble wrap.']
+ ],
+ anatomy:[['Button or keycap','The part you press.'],['Spring','Pushes the button back up.'],['Switch or dome','Shapes the feel: smooth, bumpy or clicky.'],['Housing','The body that holds it all; affects the sound.']],
+ tuning:[
+  ['Switch type','Linear is smooth all the way down, tactile has a bump, clicky adds an audible snap.','springs'],
+  ['Spring weight','Heavier springs need more force and push back harder.','springs'],
+  ['Travel','How far the button moves before it clicks.','size'],
+  ['Keycap and housing material','Metal sounds sharper; plastic is softer and quieter.','weight']
+ ],
+ play:[['rhythm','Press, release, repeat.']],
+ examples:['Lautie Puffercrash']},
+
+{key:'multi',name:'Multi-function',short:'Two or more types combined in one piece.',noise:2,nl:'Varies',tags:[],demo:null,
+ tagline:'Two or more fidget types built into one piece.',
+ intro:'Multi-function fidgets combine motions, so you can switch from spinning to clicking to sliding without carrying several pieces. The trade-off is usually size, weight or a small compromise in each mode.',
+ facts:[['Noise','Varies'],['Carry','Varies'],['Styles','Rhythm, flow, show']],
+ varieties:[
+  ['Coin + spinner','Click like a haptic coin, then flick to spin.','Two kinds of feedback in one.'],
+  ['Push + coin + rotor','A direct-push slider, haptic coin and magnetic rotor in one.','Three motions to switch between.'],
+  ['Slider + clicker','A slider with buttons built in.','Push and press in one.'],
+  ['Roll, slide and click','Two magnetic halves that roll, slide and click apart.','Very tactile and hard to put down.'],
+  ['Mechanism pieces','Watch-style mechanisms with several play modes.','The most to explore.'],
+  ['Fork hybrids','A tuning fork combined with a spinner, slider or ratchet.','Several feels, with a ring.']
+ ],
+ anatomy:[['Modes','How many motions it offers, and how good each one is.'],['Switching','How easily you move from one mode to another.'],['Size and weight','More functions usually means a bigger, heavier piece.']],
+ tuning:[
+  ['Magnets','Shared magnets affect every mode at once.','magnets'],
+  ['Bearings','Set the quality of any spin mode.','bearings'],
+  ['Weight','Balances the spin and the click.','weight'],
+  ['Build','More parts make tolerances matter more.','build']
+ ],
+ play:[['rhythm','The click modes.'],['flow','The spin and glide modes.'],['show','Mechanism pieces you watch work.']],
+ examples:['ACEdc CORE','MOT OWL','Alchemy Studio Sinan','FidgetThings Chill Pill','WANWU Camera-M','Mothand Break Sky']},
+
+{key:'skill-toys',name:'Skill Toys',short:'Begleri, knuckle rollers and tops that reward practice.',noise:1,nl:'Low',tags:['pocket'],demo:null,
+ tagline:'Fidgets that reward practice, tricks and technique.',
+ intro:'Skill toys sit alongside fidgets. Instead of repeating one motion, you learn moves and transfers, and they get more satisfying as you improve.',
+ facts:[['Noise','Low'],['Carry','Pocket-friendly'],['Styles','Skill']],
+ varieties:[
+  ['Begleri','Two beads on a short cord, swung and flipped round the fingers.','Fast, rhythmic moves once you learn them.','Aroundsquare begleri'],
+  ['Knuckle roller','A coin-like piece rolled across the knuckles.','Smooth, flowing practice.',''],
+  ['Spinning top','Spun on a desk or in the hand.','Precision and balance.',''],
+  ['Linked rings','Magnetic rings you trick with.','Transfers between rings.','Fingears']
+ ],
+ anatomy:[['Beads','The weights at each end of a begleri cord.'],['Cord','Sets the reach and speed of moves.'],['Body','The main mass of a top or roller.'],['Tip','Where a top touches the surface.']],
+ tuning:[
+  ['Bead weight','Heavier beads carry more momentum, but sting more when you miss.','weight'],
+  ['Cord length','Longer cords give slower, bigger moves; shorter ones are quicker.','size'],
+  ['Material','Changes weight, grip and sound.','weight'],
+  ['Surface','Grip and how it rolls.','surface']
+ ],
+ play:[['skill','Moves, transfers and tricks.']],
+ examples:['Aroundsquare begleri','Fingears']}
+];
+
+const HUBS=[
+ {id:'sound',intro:'The same few physics rules explain why one click sounds bright and another dull. Try them in the Sliders demo.',points:[['Hard or plastic beads','Hard beads (silicon nitride, zirconia, steel, tungsten carbide) give short, bright clicks. Plastic beads (POM, PTFE) flex, so clicks are longer, duller and quieter.'],['Bead weight','Among hard beads, weight matters most: heavy tungsten carbide gives a lower, weightier click, light silicon nitride the highest.'],['Spring stiffness','A stiffer spring pushes the bead harder into each notch, so the click is firmer and louder. Wire thickness changes it most.'],['Track spacing','Closer notches can\'t be as deep, so each click is lighter and quieter. Halve the spacing and each click carries about a quarter of the energy.'],['Two beads','Two beads alternating on one track double the clicks without making each one weaker.'],['Friction','Drag comes from spring force times friction. PTFE has roughly a third of the friction of POM.'],['Wear','Wear rises with load, so a hard bead on a heavy spring wears a track fastest.'],['The body','Heavier bodies, and metals sound travels through more slowly, such as zirconium, ring lower and chunkier than lighter titanium.']],applies:['sliders','forks','clickers']},
+ {id:'magnets',intro:'Most snaps and homing come from small, very strong neodymium magnets.',points:[['Strength','Stronger magnets pull earlier, snap harder, sound louder and need more effort.'],['Grade and size','Grades run from about N25 to N52; higher grades and bigger magnets pull harder and from further away.'],['Count and spacing','Decide how many stops, clicks or positions there are.'],['Layout','In a line on sliders, in a ring on coins, rings and spinners, in inner and outer rings on floating sliders.']],applies:['sliders','floating','forks','spinners','coins','rings','multi']},
+ {id:'springs',intro:'Mechanical clicks come from a spring pushing a bead, ball, catch or switch.',points:[['Wire thickness','Stiffness rises very steeply with wire thickness: 0.27 mm wire is roughly a third stiffer than 0.25 mm.'],['Coils','More coils make a spring softer; fewer coils make it firmer.'],['Steel vs bronze','Phosphor bronze springs are about half as stiff as steel ones the same size, and ring lower.'],['The ping','Every spring rings at its own pitch as well, which adds a faint ping to each click.'],['Spring swaps','Spare kits include plain stainless, gold-plated stainless and phosphor-bronze springs. Gold plating doesn\'t make a spring stiffer.'],['Wear','Springs soften with heavy use, so a click can turn mushy over time. A fresh spring brings it back.'],['Switch type','Linear, tactile or clicky, on button clickers.']],applies:['sliders','forks','clickers']},
+ {id:'bearings',intro:'The bearing decides how a spinner or ring turns.',points:[['Stainless steel','Common and quiet; some makers sell "silent" stainless bearings.'],['Hybrid ceramic','Ceramic balls in steel races; a popular choice for a longer, smoother spin.'],['Full ceramic','An upgrade for the longest spin, but brittle: it can crack if dropped.'],['Sizes','R188 is common; others, such as 688 or 6703, suit specific designs.'],['Cleaned vs lubricated','A dry bearing spins longer but louder; lubricant quietens it.']],applies:['spinners','rings','multi']},
+ {id:'forks',intro:'The fork is what rings; everything around it shapes the tone.',points:[['Fork material','Titanium, brass, zirconium and stainless steel forks are all sold. As a rough guide, steel and titanium ring higher, brass and zirconium lower and warmer.'],['Striker','What hits the fork matters: hard beads bounce, softer ones give a cleaner ring.'],['Touch','Touching the fork mutes it, which is why some designs build it in out of reach.'],['Removable or fixed','Some forks lift out to swap; others are fitted tightly.']],applies:['forks','sliders','floating','spinners','multi']},
+ {id:'weight',intro:'Weight changes momentum, sound and how solid a piece feels.',points:[['Material','Titanium is light, zirconium medium, steel, brass and copper heavy. See the Materials page.'],['Rim mass','On spinners, weight at the edge means a longer spin and a stronger pull.'],['Plate weight','Heavier plates give a deeper snap.'],['Balance','Even weight stops wobble and keeps a spin steady.']],applies:['sliders','floating','spinners','coins','rings','clickers','multi','skill-toys']},
+ {id:'size',intro:'Not every fidget is small. Desk pieces can be large and heavy, while pocket pieces trade size for carry.',points:[['Overall size','Fit to your hand, and whether it lives in a pocket or on a desk.'],['Thickness','Thinner pieces carry better; thicker ones are easier to grip.'],['Travel','How far a slider or button moves.'],['Caps, bands and handles','Where your fingers sit, and how comfortable it is.']],applies:['sliders','floating','spinners','coins','rings','clickers','skill-toys']},
+ {id:'surface',intro:'The surface is what your thumb actually feels.',points:[['Finish','Stonewashed, blasted, polished or coloured. See the Materials page.'],['Grooves and texture','Add grip and a different feel as you move it.'],['Knurling','A fine grip pattern on edges and caps.']],applies:['sliders','coins','skill-toys']},
+ {id:'build',intro:'Tight tolerances are what make a premium piece feel premium.',points:[['Fit','A tight fit means no wobble or rattle.'],['Press-fit vs screws','A press-fit body is more rigid; a screwed body can be opened and tuned.'],['Loose screws','Screws can loosen with heavy use; some owners add thread-lock.']],applies:['sliders','spinners','multi']},
+ {id:'swaps',intro:'Many pieces can be changed after you buy them.',points:[['Washers and pads','Washers under magnets, or rubber pads, weaken the pull.'],['Plates','Swap middle or accent plates for a new look or feel.'],['Bearings','Upgrade a spinner\'s bearing.'],['Magnets','Some designs let you add or remove magnets to change the mode.']],applies:['floating','spinners','rings','sliders']},
+ {id:'care',intro:'A little care keeps the action clean, and protects the plates.',points:[['Keep plates clear','Debris caught between the plates will damage them, especially Teflon (PTFE) plates. Teflon residue itself can cause scratching.'],['Blu Tack','Dab it on the plates to lift out dust and grit.'],['Rubbing alcohol','Wiping the plates down with isopropyl alcohol is good practice.'],['Track wear','Hard beads on heavy springs wear tracks fastest; lighter springs or softer beads are kinder.'],['Keep bearings dry','Moisture and dirt shorten spin times.'],['Patina','Let copper and brass age, or polish them back.'],['Check screws','Tighten anything that has worked loose.']],applies:['sliders','floating','spinners','coins','rings']},
+ {id:'tools',intro:'A few simple tools make tuning magnets much easier.',points:[['Magnet pullers and holders','Lift magnets cleanly out of their inserts when you re-tune a layout.'],['A metal surface','Set the fidget on a metal surface before lifting the body off, and the magnets stay put instead of jumping out.'],['Washers','Some tuning kits include washers that sit under the magnets to weaken the pull.'],['Spare magnets','Kits often add extra magnets so you can change the layout or click count.']],applies:['floating','sliders','forks','coins']},
+];
+
+const STYLES=[
+ {id:'rhythm',types:['sliders','floating','forks','coins','clickers','rings'],tune:'More stops or magnets give a faster beat; fewer give bigger, slower snaps.'},
+ {id:'flow',types:['spinners','rings'],tune:'Better bearings and more rim weight make the motion smoother and longer.'},
+ {id:'discreet',types:['sliders','coins','rings'],tune:'Softer magnets, titanium and pads keep things quiet.'},
+ {id:'show',types:['forks','spinners','multi'],tune:'Open armour, escapement and tuning-fork pieces are made to be watched and heard.'},
+ {id:'skill',types:['floating','skill-toys','spinners','rings'],tune:'2-click "fancy play" floating sliders give the most freedom for tricks; on skill toys, weight and size decide how fast moves are.'}
+];
+
+/* ---------- Audio and haptics ---------- */
+let AC=null,soundOn=true;const last={};
+function ac(){try{if(navigator.audioSession&&navigator.audioSession.type!=='playback')navigator.audioSession.type='playback';}catch(e){}try{if(!AC){const A=window.AudioContext||window.webkitAudioContext;if(A)AC=new A();}if(AC&&AC.state==='suspended')AC.resume();}catch(e){}return AC;}
+['pointerdown','keydown'].forEach(ev=>document.addEventListener(ev,ac,{capture:true}));
+function tone(type,f0,f1,dur,gain){const c=AC,t=c.currentTime,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+dur*.7);g.gain.setValueAtTime(gain,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g).connect(c.destination);o.start(t);o.stop(t+dur+.02);}
+function noise(dur,ftype,freq,gain){const c=AC,t=c.currentTime,len=Math.max(1,Math.floor(c.sampleRate*dur)),b=c.createBuffer(1,len,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=b;f.type=ftype;f.frequency.value=freq;g.gain.value=gain;s.connect(f).connect(g).connect(c.destination);s.start(t);}
+const SFX={
+ thunk:s=>{tone('sine',240,85,.1,.3+.3*s);noise(.02,'bandpass',2400,.15+.25*s);},
+ soft:()=>{tone('sine',170,95,.09,.2);},
+ tick:p=>{tone('triangle',1900*p,900*p,.035,.22);noise(.008,'highpass',4500,.45);},
+ clack:()=>{tone('square',650,280,.05,.1);noise(.03,'bandpass',3000,.5);},
+ thock:()=>{tone('sine',150,80,.08,.4);noise(.03,'lowpass',900,.35);},
+ bump:()=>{tone('sine',300,150,.05,.25);noise(.015,'bandpass',1500,.25);},
+ pop:()=>{noise(.05,'bandpass',1300,.7);tone('sine',520,130,.05,.18);},
+ ring:([f,d,g])=>{const c=AC,t=c.currentTime;[[f,1],[f*2.76,.12],[f*5.4,.05]].forEach(([fr,k])=>{const o=c.createOscillator(),gg=c.createGain();o.type='sine';o.frequency.value=fr;gg.gain.setValueAtTime(g*k,t);gg.gain.exponentialRampToValueAtTime(.0008,t+d*(k===1?1:.4));o.connect(gg).connect(c.destination);o.start(t);o.stop(t+d+.05);});noise(.01,'highpass',5000,.35);}
+};
+function play(kind,arg,minGap=30){if(!soundOn)return;const now=performance.now();if(last[kind]&&now-last[kind]<minGap)return;last[kind]=now;try{if(ac())SFX[kind](arg);}catch(e){}}
+function buzz(ms){try{if(navigator.vibrate)navigator.vibrate(ms);}catch(e){}}
+/* iPhone haptics: Safari has no vibration API, and since iOS 26.5 the only web haptic is a real tap on a
+   native switch. So tappable parts get a real switch laid over them, and drag demos get step buttons. */
+function swOver(btn,fwd){if(!btn||btn.parentNode.classList.contains('swwrap'))return;const w=document.createElement('span');w.className='swwrap'+(btn.classList.contains('bub')?' blk':'');btn.parentNode.insertBefore(w,btn);w.appendChild(btn);
+  const i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');i.className='tapsw';i.tabIndex=-1;i.setAttribute('aria-hidden','true');w.appendChild(i);fwd(i);}
+function stepPad(stage,target,what){const r=document.createElement('div');r.className='taprow';
+  r.innerHTML=`<span class="tapbtn" data-k="ArrowLeft">◀<input type="checkbox" switch class="tapsw" aria-label="Step back"></span><span class="label">Or tap to step · feel each ${what} on iPhone</span><span class="tapbtn" data-k="ArrowRight">▶<input type="checkbox" switch class="tapsw" aria-label="Step forward"></span>`;
+  stage.after(r);r.querySelectorAll('.tapbtn').forEach(b=>b.querySelector('input').addEventListener('click',()=>{ac();target.dispatchEvent(new KeyboardEvent('keydown',{key:b.dataset.k,bubbles:true,cancelable:true}));b.classList.add('hit');clearTimeout(b._t);b._t=setTimeout(()=>b.classList.remove('hit'),160);}));}
+function addTaps(el){try{
+  const t=el.querySelector('.plate[role="slider"],.ftop[role="slider"],svg[role="slider"]');
+  if(t){const kind=el.dataset.demo==='floating'?'click':t.tagName.toLowerCase()==='svg'?'step':'click';stepPad(t.closest('.stage'),t,kind);}
+  swOver(el.querySelector('.flick'),i=>i.addEventListener('click',()=>el.querySelector('.flick').click()));
+  el.querySelectorAll('.key').forEach(k=>swOver(k,i=>{i.addEventListener('pointerdown',()=>k.dispatchEvent(new PointerEvent('pointerdown')));['pointerup','pointerleave','pointercancel'].forEach(ev=>i.addEventListener(ev,()=>k.dispatchEvent(new PointerEvent(ev==='pointercancel'?'pointerup':ev))));}));
+  el.querySelectorAll('.bub').forEach(bb=>swOver(bb,i=>i.addEventListener('click',()=>bb.click())));
+}catch(e){}}
+const soundBtn=document.getElementById('soundToggle');
+soundBtn.addEventListener('click',()=>{soundOn=!soundOn;soundBtn.setAttribute('aria-pressed',String(soundOn));soundBtn.textContent=soundOn?'Sound on':'Sound off';});
+
+/* ---------- Helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const chipRow=(label,name,opts,val)=>`<div class="demo-row"><span class="label">${label}</span>${opts.map(([v,t])=>`<button class="chip" data-${name}="${v}" aria-pressed="${String(v)===String(val)}">${t}</button>`).join('')}</div>`;
+function bindChips(el,name,fn){el.querySelectorAll(`[data-${name}]`).forEach(b=>b.addEventListener('click',()=>{el.querySelectorAll(`[data-${name}]`).forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');fn(b.dataset[name]);}));}
+function angleOf(e,svg){const r=svg.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2));}
+function unwrap(d){while(d>Math.PI)d-=2*Math.PI;while(d<-Math.PI)d+=2*Math.PI;return d;}
+const metalGrad=`<defs>
+ <linearGradient id="gTi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--ti)"/><stop offset="1" style="stop-color:var(--surface-2)"/></linearGradient>
+ <linearGradient id="gBr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--brass)"/><stop offset="1" style="stop-color:var(--surface-2)"/></linearGradient>
+ <linearGradient id="gCu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--copper)"/><stop offset="1" style="stop-color:var(--surface-2)"/></linearGradient></defs>`;
+
+/* ---------- Demo: tracked slider ---------- */
+function demoSlider(el,full){
+  el.innerHTML=`
+   ${chipRow('Type','mode',[['mech','Mechanical'],['mag','Magnetic']],'mech')}
+   <div data-ctl="view"></div>
+   <div data-ctl="a"></div><div data-ctl="b"></div>
+   <div class="builder" data-ctl="build"></div>
+   <div class="demo-meta"><span class="label">Drag the plate along the track</span><span class="count">0 clicks</span></div>
+   <div class="stage track"><div class="marks"></div><div class="plate" role="slider" tabindex="0" aria-label="Slider plate" aria-valuemin="0" aria-valuemax="100"><span></span></div></div>
+   <div class="readouts" data-ctl="read"></div>
+   <div class="how-it"><strong></strong><p></p></div>
+   <div class="setup" data-ctl="setup"></div>
+   <p class="hint">An illustration based on general physics, not a measurement. Android phones buzz; on iPhone, tap the step buttons to feel each click. Arrow keys move to the next click.</p>`;
+  const track=$('.track',el),plate=$('.plate',el),marks=$('.marks',el),cnt=$('.count',el),howT=$('.how-it strong',el),howX=$('.how-it p',el);
+  let mode='mech',view='simple',trk='paragraph',stops=3,str=1,pos=2,drag=null,n=0,live=0,mid=1,bead='zr',wire='27',smat='st',beads=1;
+  const BEAD={si:['Silicon nitride',3.2,1],zr:['Zirconia',6.0,1],st:['Steel',7.9,1],wc:['Tungsten carbide',15.6,1],pom:['POM',1.41,0],ptfe:['PTFE',2.2,0]};
+  const WIRE={'25':['0.25 mm',1],'27':['0.27 mm',1.36],'30':['0.30 mm',2.07]};
+  const TR={dense:()=>Array.from({length:25},(_,i)=>2+50*i/24),paragraph:()=>Array.from({length:7},(_,i)=>2+50*i/6),long:()=>mid?[2,27,52]:[2,52]};
+  const NAME={paragraph:'Paragraph',long:'Long slide',dense:'Dense'};
+  const N=()=>mode==='mech'?TR[trk]():Array.from({length:stops},(_,i)=>2+50*i/(stops-1));
+  function clickPoints(){const ps=N();if(mode!=='mech'||beads<2||trk==='long')return ps;const h=(ps[1]-ps[0])/2;return [...ps,...ps.slice(0,-1).map(v=>v+h)].sort((a,b)=>a-b);}
+  const clamp=v=>Math.max(0,Math.min(1,v));
+  function model(){
+    const [bn,dens,hard]=BEAD[bead],k=WIRE[wire][1]*(smat==='br'?.5:1),depth=trk==='dense'?.3:1,E=k*depth;
+    const loud=clamp(Math.sqrt(E)/1.44*(hard?1:.6));
+    const weight=clamp(E/2.07*(.85+.15*dens/15.6)+.05);
+    const bright=hard?clamp(.55+.45*(1-(dens-3.2)/12.4)):(bead==='pom'?.22:.15);
+    const wear=clamp(k/2.07*(hard?1:.35)*(bead==='ptfe'?.7:1)+.05);
+    const ping=1900*({'25':1,'27':1.15,'30':1.35})[wire]*(smat==='br'?.7:1);
+    return {bn,dens,hard,k,loud,weight,bright,wear,ping};
+  }
+  function sound(){
+    const m=model();if(!soundOn)return;const now=performance.now();if(last.click2&&now-last.click2<18)return;last.click2=now;
+    try{if(!ac())return;const pitch=m.hard?Math.pow(6/m.dens,.25):.6,g=.08+.32*m.loud;
+      if(m.hard){noise(.006,'highpass',2600*pitch+1400*m.bright,g*1.6);tone('triangle',1700*pitch,800*pitch,.03,g*.7);}
+      else{noise(.016,'lowpass',1300,g*1.2);tone('sine',700,300,.04,g*.5);}
+      tone('sine',m.ping,m.ping*.98,.09,.02+.04*m.k/2.07);
+    }catch(e){}
+  }
+  function fb(){n++;cnt.textContent=n+(n===1?' click':' clicks');
+    if(mode==='mag'){play('thunk',str/2);buzz(10+str*8);return;}
+    sound();const m=model();buzz(Math.round(3+m.weight*14));}
+  function set(p){pos=p;plate.style.left=p+'%';plate.setAttribute('aria-valuenow',Math.round((p-2)*2));}
+  function cross(a,b){if(a===b)return;const lo=Math.min(a,b),hi=Math.max(a,b);clickPoints().forEach(v=>{if(v>lo+.01&&v<=hi+.01&&!(Math.abs(v-a)<.01))fb();});}
+  function nearest(p,ps=N()){let b=0;ps.forEach((v,i)=>{if(Math.abs(v-p)<Math.abs(ps[b]-p))b=i;});return b;}
+  const bars=v=>`<span class="bars">${[0,1,2,3,4].map(i=>`<i class="${v>i/5+.02?'on':''}"></i>`).join('')}</span>`;
+  function code(){return `${NAME[trk]}${trk==='long'?(mid?' (middle notch)':''):''} · ${BEAD[bead][0]} bead${beads>1?' ×2':''} · ${WIRE[wire][0]} ${smat==='br'?'bronze':'steel'} spring`;}
+  function readSaved(){try{return JSON.parse(localStorage.getItem('ftg-setups')||'[]');}catch(e){return [];}}
+  function writeSaved(a){try{localStorage.setItem('ftg-setups',JSON.stringify(a.slice(0,8)));return true;}catch(e){return false;}}
+  function renderSetup(){
+    const box=$('[data-ctl="setup"]',el);
+    if(mode!=='mech'||view!=='detailed'){box.innerHTML='';return;}
+    const saved=readSaved();
+    box.innerHTML=`<span class="label">Your setup</span><div class="code" tabindex="0">${code()}</div>
+      <div class="demo-row"><button class="btn" data-act="copy">Copy setup</button><button class="btn ghost" data-act="save">Save on this device</button><span class="hint" data-msg aria-live="polite"></span></div>
+      ${saved.length?`<div class="demo-row"><span class="label">Saved</span>${saved.map((s,i)=>`<button class="chip" data-load="${i}">${s.label}</button>`).join('')}</div>`:''}`;
+    const msg=$('[data-msg]',box);
+    $('[data-act="copy"]',box).addEventListener('click',()=>{const t=code();const done=()=>msg.textContent='Copied';
+      try{navigator.clipboard.writeText(t).then(done,()=>{selectCode();msg.textContent='Select and copy the text above';});}catch(e){selectCode();msg.textContent='Select and copy the text above';}});
+    $('[data-act="save"]',box).addEventListener('click',()=>{const a=readSaved();a.unshift({label:code(),s:{trk,mid,bead,wire,smat,beads}});msg.textContent=writeSaved(a)?'Saved':'This browser won\'t save it; copy it instead';renderSetup();});
+    box.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>{const x=readSaved()[+b.dataset.load];if(!x)return;({trk,mid,bead,wire,smat,beads}=x.s);controls();render();}));
+    function selectCode(){const c=$('.code',box),r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);}
+  }
+  function readouts(){
+    const box=$('[data-ctl="read"]',el);
+    if(mode!=='mech'||view!=='detailed'){box.innerHTML='';return;}
+    const m=model();
+    box.innerHTML=[['Brightness',m.bright],['Click weight',m.weight],['Loudness',m.loud],['Track wear',m.wear]].map(([l,v])=>`<div><span class="label">${l}</span>${bars(v)}</div>`).join('');
+  }
+  function controls(){
+    const A=$('[data-ctl="a"]',el),B=$('[data-ctl="b"]',el),C=$('[data-ctl="build"]',el),V=$('[data-ctl="view"]',el);
+    V.innerHTML=mode==='mech'?chipRow('View','vw',[['simple','Simple'],['detailed','Detailed']],view):'';
+    bindChips(el,'vw',v=>{view=v;controls();update();});
+    if(mode==='mech'){
+      A.innerHTML=chipRow('Track','trk',[['paragraph','Paragraph'],['long','Long slide'],['dense','Dense']],trk)+(trk==='long'?chipRow('Middle notch','mid',[[1,'Yes'],[0,'No']],mid):'');
+      B.innerHTML='';
+      C.innerHTML=view!=='detailed'?'':`<span class="label">Build a click</span>`+chipRow('Bead','bd',[['si','Silicon nitride'],['zr','Zirconia'],['st','Steel'],['wc','Tungsten carbide'],['pom','POM'],['ptfe','PTFE']],bead)
+        +chipRow('Spring wire','wi',[['25','0.25 mm'],['27','0.27 mm'],['30','0.30 mm']],wire)
+        +chipRow('Spring','sm',[['st','Steel'],['br','Bronze']],smat)
+        +(trk==='long'?'':chipRow('Beads','bc',[[1,'One'],[2,'Two']],beads));
+      bindChips(el,'trk',v=>{trk=v;controls();render();});bindChips(el,'mid',v=>{mid=+v;render();});
+      bindChips(el,'bd',v=>{bead=v;update();});bindChips(el,'wi',v=>{wire=v;update();});bindChips(el,'sm',v=>{smat=v;update();});bindChips(el,'bc',v=>{beads=+v;update();});
+    }else{
+      A.innerHTML=chipRow('Clicks','stops',[[2,'2-click'],[3,'3-click']],stops);B.innerHTML=chipRow('Magnets','str',[[0,'Soft'],[1,'Medium'],[2,'Strong']],str);C.innerHTML='';
+      bindChips(el,'stops',v=>{stops=+v;render();});bindChips(el,'str',v=>{str=+v;render();});
+    }
+  }
+  function explain(){
+    if(mode==='mag'){howT.textContent='How a magnetic slider works';howX.textContent='Magnets set each stop. As the plate gets close it\'s pulled in and lands with a thunk; between stops it glides freely.'+[' Soft magnets pull gently and land quietly.','',' Strong magnets grab the plate early and snap it home hard.'][str];return;}
+    const m=model(),T={paragraph:'Paragraph track: deep, evenly spaced notches, so you get a pronounced click, a short slide, then the next click.',long:'Long slide: a long, smooth groove with a notch at each end; some also have one in the middle.',dense:'Dense track: shallow notches packed tightly together, so you get a fast, fine run of light clicks.'};
+    if(view!=='detailed'){howT.textContent='How a mechanical slider works';howX.textContent='A spring-loaded bead runs over notches in the track. '+T[trk]+' Choose Detailed to change the bead and spring and hear the difference.';return;}
+    howT.textContent='How this click is made';
+    howX.textContent=`${T[trk]} ${m.hard?`A hard ${m.bn.toLowerCase()} bead gives a short, bright click${bead==='wc'?', and its weight makes it lower and heavier':bead==='si'?', and as the lightest hard bead it sounds highest':''}.`:`A plastic ${m.bn} bead flexes, so the click is softer, duller and quieter.`} ${wire==='30'?'Thick wire makes the spring much stiffer, for a firmer, louder click.':wire==='25'?'Thin wire keeps the spring light and easy.':'Medium wire is about a third stiffer than 0.25 mm.'}${smat==='br'?' Bronze springs are about half as stiff as steel and ring lower.':''}${beads>1&&trk!=='long'?' Two beads on one track double the clicks without weakening them.':''}`;
+  }
+  function update(){readouts();explain();renderSetup();}
+  function render(){
+    plate.classList.toggle('mech',mode==='mech');
+    $('span',plate).textContent=mode==='mag'?'Ti · MAGNETIC':'Cu · '+NAME[trk].toUpperCase();
+    marks.innerHTML=N().map(v=>mode==='mag'?`<span class="stop" style="left:${v+23}%"></span>`:`<span class="notch${trk==='dense'?'':' deep'}" style="left:${v+23}%"></span>`).join('');
+    n=0;cnt.textContent='0 clicks';live=0;set(2);update();
+  }
+  bindChips(el,'mode',v=>{mode=v;str=1;controls();render();});
+  plate.addEventListener('pointerdown',e=>{drag={x:e.clientX,start:pos};live=nearest(pos);plate.classList.add('dragging');plate.setPointerCapture(e.pointerId);});
+  plate.addEventListener('pointermove',e=>{
+    if(!drag)return;let p=drag.start+(e.clientX-drag.x)/track.clientWidth*100;p=Math.max(2,Math.min(52,p));
+    if(mode==='mag'){const k=nearest(p);if(Math.abs(N()[k]-p)<[3,6,10][str]){p=N()[k];if(k!==live){live=k;fb();}}set(p);}
+    else{cross(pos,p);set(p);}
+  });
+  const end=()=>{if(!drag)return;plate.classList.remove('dragging');drag=null;
+    const k=nearest(pos),t=N()[k];
+    if(mode==='mag'){if(k!==live)fb();live=k;set(t);}
+    else if(Math.abs(t-pos)<2.6){cross(pos,t);set(t);}
+  };
+  plate.addEventListener('pointerup',end);plate.addEventListener('pointercancel',end);
+  plate.addEventListener('keydown',e=>{
+    if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;e.preventDefault();
+    const ps=N(),r=e.key==='ArrowRight';const t=r?ps.find(v=>v>pos+.01):[...ps].reverse().find(v=>v<pos-.01);
+    if(t===undefined)return;if(mode==='mag'){live=ps.indexOf(t);fb();}else cross(pos,t);set(t);});
+  controls();render();
+}
+
+
+/* ---------- Demo: tuning fork slider ---------- */
+function demoFork(el){
+  el.innerHTML=`
+   ${chipRow('Fork','fk',[['ti','Titanium'],['ss','Steel'],['zr','Zirconium'],['br','Brass']],'ti')}
+   ${chipRow('Hand','fh',[[0,'Off the fork'],[1,'Touching it']],0)}
+   <div class="demo-meta"><span class="label">Push the plate to either end</span><span class="count">0 rings</span></div>
+   <div class="stage track"><span class="tine" style="left:1.2%"></span><span class="tine" style="left:2.4%"></span><span class="tine" style="left:97.6%"></span><span class="tine" style="left:98.8%"></span><div class="plate" role="slider" tabindex="0" aria-label="Fork slider plate" aria-valuemin="1" aria-valuemax="2"><span>FORK</span></div></div>
+   <div class="how-it"><strong>How a tuning fork works</strong><p></p></div>
+   <p class="hint">Push quickly for a longer ring. Pitch differences are illustrative.</p>`;
+  const track=$('.track',el),plate=$('.plate',el),cnt=$('.count',el),how=$('.how-it p',el),tines=[...el.querySelectorAll('.tine')];
+  const F={ti:1320,ss:1250,zr:990,br:880};let mat='ti',hand=0,idx=0,n=0,drag=null,lp=0,lt=0,vel=0;
+  const pos=[4,50];
+  function txt(){how.textContent=({ti:'Titanium',ss:'Stainless steel',zr:'Zirconium',br:'Brass'})[mat]+' fork. '+(mat==='ti'||mat==='ss'?'Steel and titanium tend to ring higher and brighter.':'Brass and zirconium tend to ring lower and warmer.')+' '+(hand?'Your hand is touching the fork, so it mutes to a short tap.':'The plate strikes the fork at each end and it rings on.');}
+  function strike(sp){n++;cnt.textContent=n+(n===1?' ring':' rings');const f=Math.min(1,sp/140);const d=hand?.12:.5+f*1.6;play('ring',[F[mat],d,.18+.2*f],0);buzz(hand?8:[18,40,10]);tines.forEach(t=>{t.classList.remove('ringing');void t.offsetWidth;if(!hand)t.classList.add('ringing');});}
+  function place(i,sp){const ch=i!==idx;idx=i;plate.style.left=pos[i]+'%';plate.setAttribute('aria-valuenow',i+1);if(ch)strike(sp);}
+  plate.addEventListener('pointerdown',e=>{drag={x:e.clientX,start:parseFloat(plate.style.left)};lp=drag.start;lt=performance.now();vel=0;plate.classList.add('dragging');plate.setPointerCapture(e.pointerId);});
+  plate.addEventListener('pointermove',e=>{if(!drag)return;let p=drag.start+(e.clientX-drag.x)/track.clientWidth*100;p=Math.max(4,Math.min(50,p));const now=performance.now();vel=vel*.5+Math.abs(p-lp)/Math.max(.008,(now-lt)/1000)*.5;lp=p;lt=now;
+    const k=p<27?0:1;if(Math.abs(pos[k]-p)<5&&k!==idx){p=pos[k];place(k,vel);}plate.style.left=p+'%';});
+  const end=()=>{if(!drag)return;drag=null;plate.classList.remove('dragging');const p=parseFloat(plate.style.left);place(p<27?0:1,Math.max(vel,40));};
+  plate.addEventListener('pointerup',end);plate.addEventListener('pointercancel',end);
+  plate.addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&idx===0){e.preventDefault();place(1,120);}if(e.key==='ArrowLeft'&&idx===1){e.preventDefault();place(0,120);}});
+  bindChips(el,'fk',v=>{mat=v;txt();});bindChips(el,'fh',v=>{hand=+v;txt();});
+  plate.style.left=pos[0]+'%';txt();
+}
+/* ---------- Demo: floating slider ---------- */
+function demoFloating(el){
+  el.innerHTML=`
+   ${chipRow('Layout','fm',[['3','3-click (8 × 8)'],['2','2-click (8 × 6)']],'3')}
+   ${chipRow('Washers','fw',[[0,'None'],[1,'Fitted']],0)}
+   <div class="demo-meta"><span class="label">Push the top plate side to side</span><span class="count">0 clicks</span></div>
+   <div class="stage fbox"><div class="fplate fbase"><div class="mg"></div></div><div class="fplate ftop" tabindex="0" role="slider" aria-label="Floating plate. Arrow keys move it between clicks."><div class="mg"></div><span>Ti · FLOAT</span></div></div>
+   <div class="how-it"><strong>How a floating slider works</strong><p></p></div>`;
+  const top=$('.ftop',el),base=$('.fbase',el),cnt=$('.count',el),how=$('.how-it p',el);
+  let lay='3',wash=0,x=0,y=0,vx=0,vy=0,drag=null,raf=0,n=0,cur=1;
+  const CENT8=[[30,22],[43,22],[57,22],[70,22],[30,78],[43,78],[57,78],[70,78]];
+  const CORN8=[[7,14],[21,14],[79,14],[93,14],[7,86],[21,86],[79,86],[93,86]];
+  const CENT6=[[36,22],[50,22],[64,22],[36,78],[50,78],[64,78]];
+  const POS=()=>lay==='3'?[-60,0,60]:[-48,48];
+  const dots=a=>a.map(([l,t])=>`<i style="left:${l}%;top:${t}%"></i>`).join('');
+  function setup(){
+    $('.mg',top).innerHTML=dots(lay==='3'?CENT8:CENT6);
+    $('.mg',base).innerHTML=dots(lay==='3'?CENT8:CORN8);
+    cur=lay==='3'?1:0;x=POS()[cur];y=0;vx=vy=0;draw();
+    how.textContent=(lay==='3'?'Eight magnets on each plate, centralised on both sides, give three click positions. 3-click sliders don\'t currently offer a 2-click option.':'Eight magnets on the base are pushed to the very corners and six on the top are centralised, giving two click positions and more freedom for "fancy play" tricks. Most 2-click sliders can be retuned to 3-click.')+(wash?' Washers under the magnets weaken the pull, so the clicks are softer.':'');
+  }
+  function nearest(p){const ps=POS();let b=0;ps.forEach((v,i)=>{if(Math.abs(v-p)<Math.abs(ps[b]-p))b=i;});return b;}
+  function click(i){if(i===cur)return;cur=i;n++;cnt.textContent=n+(n===1?' click':' clicks');play('thunk',wash?.15:.45);buzz(wash?8:14);top.setAttribute('aria-valuenow',i+1);}
+  function draw(){top.style.transform=`translate(calc(-50% + ${x}px),calc(-50% + ${y}px))`;}
+  function loop(){
+    const k=(wash?45:85),c=2*Math.sqrt(k)*.45,dt=1/60,tx=POS()[cur];
+    vx+=(-k*(x-tx)-c*vx)*dt;vy+=(-k*y-c*vy)*dt;x+=vx*dt;y+=vy*dt;draw();
+    if(Math.abs(x-tx)<.4&&Math.abs(y)<.4&&Math.hypot(vx,vy)<4){x=tx;y=0;vx=vy=0;draw();raf=0;return;}
+    raf=requestAnimationFrame(loop);
+  }
+  function settle(){if(!raf)raf=requestAnimationFrame(loop);}
+  top.addEventListener('pointerdown',e=>{cancelAnimationFrame(raf);raf=0;drag={x:e.clientX-x,y:e.clientY-y};top.setPointerCapture(e.pointerId);top.style.cursor='grabbing';});
+  top.addEventListener('pointermove',e=>{if(!drag)return;let dx=e.clientX-drag.x,dy=(e.clientY-drag.y)*.35;dx=Math.max(-80,Math.min(80,dx));dy=Math.max(-22,Math.min(22,dy));
+    const k=nearest(dx),cap=wash?6:12;if(Math.abs(POS()[k]-dx)<cap){click(k);dx=POS()[k];}x=dx;y=dy;draw();});
+  const end=()=>{if(!drag)return;drag=null;top.style.cursor='';click(nearest(x));settle();};
+  top.addEventListener('pointerup',end);top.addEventListener('pointercancel',end);
+  top.addEventListener('keydown',e=>{const max=POS().length-1;if(e.key==='ArrowRight'&&cur<max){e.preventDefault();click(cur+1);settle();}if(e.key==='ArrowLeft'&&cur>0){e.preventDefault();click(cur-1);settle();}});
+  bindChips(el,'fm',v=>{lay=v;setup();});
+  bindChips(el,'fw',v=>{wash=+v;setup();});
+  top.setAttribute('aria-valuemin','1');setup();
+}
+
+/* ---------- Demo: spinner ---------- */
+function demoSpinner(el){
+  el.innerHTML=`
+   ${chipRow('Variety','sv',[['bar','Bar'],['tri','Tri-arm'],['beads','Beaded'],['armour','Open armour']],'bar')}
+   ${chipRow('Bearing','sb',[[0,'Steel'],[1,'Hybrid'],[2,'Full ceramic']],1)}
+   ${chipRow('Rim weight','sr',[[0,'Light'],[1,'Standard'],[2,'Heavy']],1)}
+   <div class="stage" style="padding:8px"><svg viewBox="-110 -110 220 220" role="img" aria-label="Spinner. Drag round to spin, or press Flick.">${metalGrad}
+     <path d="M0,-106 l-6,-0 l6,9 l6,-9z" fill="var(--accent)"/>
+     <g class="rot"></g>
+     <circle r="24" fill="var(--surface)" stroke="var(--muted)" stroke-width="2"/><circle r="15" fill="none" stroke="var(--line)" stroke-width="2"/></svg></div>
+   <div class="demo-meta"><div class="readout"><div><span class="label">Speed</span><b class="rpm">0 rpm</b></div><div><span class="label">Spin time</span><b class="time">0.0 s</b></div></div><button class="btn flick">Flick</button></div>
+   <div class="how-it"><strong></strong><p></p></div>
+   <p class="hint">Drag round the spinner to spin it. Times are illustrative and shorter than real spins.</p>`;
+  const svg=$('svg',el),rot=$('.rot',el),rpmEl=$('.rpm',el),tEl=$('.time',el),howT=$('.how-it strong',el),howX=$('.how-it p',el);
+  let v='bar',b=1,rw=1,m=0,ang=0,om=0,drag=null,raf=0,t0=0,lastT=0,open=0,opened=false,lastDet=0;
+  const HOW={bar:['Bar spinner','Two weighted lobes spin round a central bearing. More weight in the lobes means a longer spin and more gyroscopic pull.'],
+   tri:['Tri-arm spinner','Three weighted lobes spin round one bearing for a balanced, classic spin.'],
+   beads:['Beaded spinner','There is space round the bearing for beads to be installed. The loose beads move as it spins, adding sound and feel.'],
+   armour:['Open armour','The armour plates stay closed at low speed. Spin it hard and they swing open, then close again as it slows.']};
+  function shape(){
+    const rimW=[3,6,10][rw],lobeR=[9,13,17][rw];let s='';
+    if(v==='tri'||v==='bar'){const arms=v==='tri'?[0,120,240]:[0,180],L=v==='tri'?62:66;s=arms.map(a=>`<g transform="rotate(${a})"><rect x="-14" y="-${L}" width="28" height="${L}" fill="url(#gTi)"/><circle cy="-${L}" r="28" fill="url(#gTi)" stroke="var(--line)"/><circle cy="-${L}" r="${lobeR}" fill="url(#gBr)"/></g>`).join('')+`<circle r="34" fill="url(#gTi)"/>`;}
+    else if(v==='beads'){s=`<circle r="84" fill="url(#gTi)" stroke="var(--line)"/><circle r="${84-rimW/2}" fill="none" stroke="var(--brass)" stroke-width="${rimW}"/><circle r="58" fill="var(--surface-2)" stroke="var(--line)"/>`+Array.from({length:9},(_,i)=>`<circle transform="rotate(${i*40})" cy="-44" r="9" fill="url(#gBr)" stroke="var(--bg)"/>`).join('');}
+    else{s=`<circle r="50" fill="url(#gTi)" stroke="var(--line)"/><g class="armL"><path d="M-34,-70 A78,78 0 0,0 -34,70 L-26,52 A58,58 0 0,1 -26,-52Z" fill="url(#gCu)" stroke="var(--line)"/><circle cx="-62" cy="0" r="${lobeR-3}" fill="url(#gBr)"/></g><g class="armR"><path d="M34,-70 A78,78 0 0,1 34,70 L26,52 A58,58 0 0,0 26,-52Z" fill="url(#gCu)" stroke="var(--line)"/><circle cx="62" cy="0" r="${lobeR-3}" fill="url(#gBr)"/></g>`;}
+    if(m)s+=Array.from({length:m},(_,i)=>`<circle transform="rotate(${i*360/m})" cy="-42" r="4" fill="var(--copper)" stroke="var(--bg)"/>`).join('');
+    rot.innerHTML=s;howT.textContent=HOW[v][0];
+    howX.textContent=HOW[v][1]+(m?` With ${m} magnets it ticks as each one passes the marker, adds drag and settles into a magnet position as it stops.`:'');
+    draw();
+  }
+  function draw(){rot.setAttribute('transform',`rotate(${ang*180/Math.PI})`);if(v==='armour'){const d=open*20;const L=$('.armL',rot),R=$('.armR',rot);if(L){L.setAttribute('transform',`translate(${-d},0)`);R.setAttribute('transform',`translate(${d},0)`);}}rpmEl.textContent=Math.round(Math.abs(om)*60/(2*Math.PI))+' rpm';}
+  function decel(){return [1.9,1.35,1.0][b]*[1.3,1,.72][rw]+m*.28+(v==='beads'?.6:0);}
+  function step(now){
+    const dt=Math.min(.05,(now-lastT)/1000||.016);lastT=now;
+    if(!drag&&om!==0){const d=decel()+Math.abs(om)*.03;const s=Math.sign(om);om-=s*d*dt;if(Math.sign(om)!==s)om=0;
+      if(m&&Math.abs(om)<1.1){const stepA=2*Math.PI/m;ang=Math.round(ang/stepA)*stepA;om=0;play('thunk',.3);buzz(12);}
+      ang+=om*dt;tEl.textContent=((now-t0)/1000).toFixed(1)+' s';}
+    const tc=m||(v==='beads'?9:0);
+    if(tc){const det=Math.floor(ang/(2*Math.PI/tc));if(det!==lastDet){lastDet=det;play('tick',m?1+(m>4?.2:0):1.4,45);if(Math.abs(om)<8)buzz(5);}}
+    if(v==='armour'){const target=Math.max(0,Math.min(1,(Math.abs(om)-11)/12));open+=(target-open)*.12;const o=open>.5;if(o!==opened){opened=o;play('clack');buzz(15);}}
+    draw();
+    if(drag||om!==0||open>.01){raf=requestAnimationFrame(step);}else{raf=0;open=0;draw();}
+  }
+  function run(){if(!raf){lastT=performance.now();raf=requestAnimationFrame(step);}}
+  $('.flick',el).addEventListener('click',()=>{om=34*[1.15,1,.85][rw]*(om<0?-1:1)||34*[1.15,1,.85][rw];t0=performance.now();run();});
+  let la=0,lt=0;
+  svg.addEventListener('pointerdown',e=>{drag=true;la=angleOf(e,svg);lt=performance.now();om=0;svg.setPointerCapture(e.pointerId);run();});
+  svg.addEventListener('pointermove',e=>{if(!drag)return;const a=angleOf(e,svg),now=performance.now(),d=unwrap(a-la),dt=Math.max(.008,(now-lt)/1000);ang+=d;om=om*.6+(d/dt)*.4;la=a;lt=now;});
+  const end=()=>{if(!drag)return;drag=false;om=Math.max(-40,Math.min(40,om*[1.15,1,.85][rw]));t0=performance.now();run();};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  bindChips(el,'sv',x=>{v=x;open=0;opened=false;shape();});
+  bindChips(el,'sb',x=>{b=+x;});
+  bindChips(el,'sr',x=>{rw=+x;shape();});
+  shape();
+}
+
+/* ---------- Demo: haptic coin ---------- */
+function demoCoin(el){
+  el.innerHTML=`
+   ${chipRow('Magnets','cm',[[4,'4'],[6,'6'],[8,'8'],[12,'12']],6)}
+   ${chipRow('Strength','cs',[[0,'Soft'],[1,'Medium'],[2,'Strong']],1)}
+   <div class="demo-meta"><span class="label">Twist the top disc</span><span class="count">0 clicks</span></div>
+   <div class="stage" style="padding:8px"><svg viewBox="-110 -110 220 220" tabindex="0" role="slider" aria-label="Coin top disc. Arrow keys turn it.">${metalGrad}
+     <circle r="96" fill="var(--surface-2)" stroke="var(--line)" stroke-width="2"/><g class="mags"></g>
+     <g class="top"><circle r="70" fill="url(#gBr)" stroke="var(--line)" stroke-width="2"/><circle r="70" fill="none" stroke="var(--bg)" stroke-width="3" stroke-dasharray="2 4" opacity=".5"/><path d="M0,-70 L0,-84" stroke="var(--fg)" stroke-width="5" stroke-linecap="round"/><circle cy="-56" r="6" fill="var(--copper)" stroke="var(--bg)"/><circle r="10" fill="var(--surface)" stroke="var(--line)"/></g></svg></div>
+   <div class="how-it"><strong>How a haptic coin works</strong><p></p></div>`;
+  const svg=$('svg',el),top=$('.top',el),mags=$('.mags',el),cnt=$('.count',el),how=$('.how-it p',el);
+  let m=6,s=1,ang=0,pos=0,n=0,drag=null,la=0;
+  const stepA=()=>2*Math.PI/m;
+  function draw(){top.setAttribute('transform',`rotate(${ang*180/Math.PI})`);}
+  function setup(){mags.innerHTML=Array.from({length:m},(_,i)=>`<circle transform="rotate(${i*360/m})" cy="-84" r="6" fill="var(--copper)" stroke="var(--bg)"/>`).join('');ang=Math.round(ang/stepA())*stepA();pos=Math.round(ang/stepA());draw();
+    how.textContent=`${m} magnets in the base give ${m} positions per turn. `+(m>=8?'More magnets mean smaller, quicker clicks.':'Fewer magnets mean bigger, slower snaps.')+' '+['Soft magnets click quietly with little effort.','','Strong magnets snap hard and need a firmer twist.'][s];}
+  function fb(){n++;cnt.textContent=n+(n===1?' click':' clicks');play(s===2||m<8?'thunk':'tick',s===2?.8:1+(m>=8?.15:0));buzz(6+s*5);}
+  svg.addEventListener('pointerdown',e=>{drag=true;la=angleOf(e,svg);svg.setPointerCapture(e.pointerId);});
+  svg.addEventListener('pointermove',e=>{if(!drag)return;const a=angleOf(e,svg);ang+=unwrap(a-la);la=a;
+    const st=stepA(),k=Math.round(ang/st),win=[.15,.25,.38][s]*st;
+    if(Math.abs(ang-k*st)<win){if(k!==pos){pos=k;fb();}draw();top.setAttribute('transform',`rotate(${k*st*180/Math.PI})`);}else draw();});
+  const end=()=>{if(!drag)return;drag=false;const k=Math.round(ang/stepA());if(k!==pos){pos=k;fb();}ang=k*stepA();draw();};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  svg.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();pos+=e.key==='ArrowRight'?1:-1;ang=pos*stepA();fb();draw();}});
+  bindChips(el,'cm',v=>{m=+v;setup();});
+  bindChips(el,'cs',v=>{s=+v;setup();});
+  setup();
+}
+
+/* ---------- Demo: ring ---------- */
+function demoRing(el){
+  el.innerHTML=`
+   ${chipRow('Type','rm',[['smooth','Spinner ring'],['ratchet','Ratchet ring']],'ratchet')}
+   <div data-ctl="teeth"></div>
+   <div class="demo-meta"><span class="label">Turn the outer band</span><span class="count">0 clicks</span></div>
+   <div class="stage" style="padding:8px"><svg viewBox="-110 -110 220 220" tabindex="0" role="slider" aria-label="Ring outer band. Arrow keys turn it.">${metalGrad}
+     <path d="M0,-108 l-6,0 l6,9 l6,-9z" fill="var(--accent)"/>
+     <g class="band"></g><circle r="56" fill="var(--bg)" stroke="var(--line)" stroke-width="2"/><circle r="56" fill="none" stroke="var(--surface-2)" stroke-width="10"/></svg></div>
+   <div class="how-it"><strong></strong><p></p></div>`;
+  const svg=$('svg',el),band=$('.band',el),cnt=$('.count',el),howT=$('.how-it strong',el),howX=$('.how-it p',el);
+  let mode='ratchet',teeth=24,ang=0,om=0,n=0,drag=null,la=0,lt=0,raf=0,det=0,lastT=0;
+  function setup(){
+    const tc=mode==='ratchet'?teeth:8;
+    band.innerHTML=`<circle r="80" fill="none" stroke="url(#gBr)" stroke-width="30"/>`+Array.from({length:tc},(_,i)=>`<line transform="rotate(${i*360/tc})" x1="0" y1="-93" x2="0" y2="${mode==='ratchet'?-80:-88}" stroke="var(--bg)" stroke-width="${mode==='ratchet'?2:1}" opacity=".6"/>`).join('');
+    const ctl=$('[data-ctl="teeth"]',el);
+    if(mode==='ratchet'){ctl.innerHTML=chipRow('Teeth','rt',[[12,'12'],[24,'24'],[36,'36']],teeth);bindChips(el,'rt',v=>{teeth=+v;setup();});}else ctl.innerHTML='';
+    howT.textContent=mode==='ratchet'?'How a ratchet ring works':'How a spinner ring works';
+    howX.textContent=mode==='ratchet'?`A small catch clicks over ${teeth} teeth as the band turns. `+(teeth>24?'More teeth give fine, fast ticks.':teeth<24?'Fewer teeth give bigger, slower clicks.':'A balanced, even rhythm.'):'The outer band turns on a bearing round the inner ring. Flick it and it keeps going, quietly.';
+    det=Math.floor(ang/(2*Math.PI/teeth));draw();
+  }
+  function draw(){band.setAttribute('transform',`rotate(${ang*180/Math.PI})`);}
+  function ticks(){if(mode!=='ratchet')return;const d=Math.floor(ang/(2*Math.PI/teeth));if(d!==det){const k=Math.abs(d-det);det=d;n+=k;cnt.textContent=n+(n===1?' click':' clicks');play('tick',teeth>24?1.3:teeth<24?.85:1,40);buzz(5);}}
+  function step(now){const dt=Math.min(.05,(now-lastT)/1000||.016);lastT=now;
+    if(!drag){const d=(mode==='ratchet'?6:1.2)+Math.abs(om)*.05;const s=Math.sign(om);om-=s*d*dt;if(Math.sign(om)!==s)om=0;ang+=om*dt;ticks();}
+    draw();if(drag||om!==0)raf=requestAnimationFrame(step);else raf=0;}
+  function run(){if(!raf){lastT=performance.now();raf=requestAnimationFrame(step);}}
+  svg.addEventListener('pointerdown',e=>{drag=true;la=angleOf(e,svg);lt=performance.now();om=0;svg.setPointerCapture(e.pointerId);run();});
+  svg.addEventListener('pointermove',e=>{if(!drag)return;const a=angleOf(e,svg),now=performance.now(),d=unwrap(a-la),dt=Math.max(.008,(now-lt)/1000);ang+=d;om=om*.6+(d/dt)*.4;la=a;lt=now;ticks();});
+  const end=()=>{if(!drag)return;drag=false;om=Math.max(-25,Math.min(25,om));run();};
+  svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
+  svg.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();ang+=(e.key==='ArrowRight'?1:-1)*2*Math.PI/(mode==='ratchet'?teeth:16);ticks();draw();}});
+  bindChips(el,'rm',v=>{mode=v;setup();});
+  setup();
+}
+
+/* ---------- Demo: clicker ---------- */
+function demoClicker(el){
+  el.innerHTML=`
+   ${chipRow('Switch','ck',[['linear','Linear'],['tactile','Tactile'],['clicky','Clicky']],'clicky')}
+   <div class="stage keys"><button class="key" data-k="0">PRESS</button><button class="key" data-k="1">PRESS</button></div>
+   <div class="how-it"><strong></strong><p></p></div>
+   <div class="demo-meta"><span class="label">Bubble-wrap style: pop them all</span></div>
+   <div class="stage bubbles">${Array.from({length:12},()=>'<button class="bub" aria-label="Bubble"></button>').join('')}</div>`;
+  const howT=$('.how-it strong',el),howX=$('.how-it p',el);let sw='clicky';
+  const HOW={linear:['Linear switch','Smooth all the way down, with a soft thock at the bottom. The quietest option.'],tactile:['Tactile switch','A small bump you feel part-way down, with a muted sound.'],clicky:['Clicky switch','A bump plus a sharp, audible click on the way down and back up.']};
+  function set(){howT.textContent=HOW[sw][0];howX.textContent=HOW[sw][1];}
+  el.querySelectorAll('.key').forEach(k=>{
+    k.addEventListener('pointerdown',()=>{k.classList.add('down');if(sw==='linear')play('thock');else if(sw==='tactile')play('bump');else play('tick',1.2);buzz(sw==='linear'?6:10);});
+    const up=()=>{if(!k.classList.contains('down'))return;k.classList.remove('down');if(sw==='clicky')play('tick',1.45,0);else if(sw==='linear')play('soft');};
+    k.addEventListener('pointerup',up);k.addEventListener('pointerleave',up);
+    k.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat){e.preventDefault();k.dispatchEvent(new PointerEvent('pointerdown'));setTimeout(up,90);}});
+  });
+  const bubs=[...el.querySelectorAll('.bub')];
+  bubs.forEach(bb=>bb.addEventListener('click',()=>{if(bb.classList.contains('popped'))return;bb.classList.add('popped');play('pop',0,0);buzz(12);
+    if(bubs.every(x=>x.classList.contains('popped')))setTimeout(()=>bubs.forEach(x=>x.classList.remove('popped')),700);}));
+  bindChips(el,'ck',v=>{sw=v;set();});set();
+}
+
+/* ---------- Build type pages ---------- */
+const app=document.getElementById('app');
+const search=n=>`https://www.google.com/search?q=${encodeURIComponent(n+' fidget')}`;
+function xsec(ps,dp){const W=200,H=44,b=16,r=dp?7:2.6;let d=`M0,${b}`;ps.forEach(v=>{const x=8+v*184;d+=` L${(x-r).toFixed(1)},${b} A${r},${r} 0 0 0 ${(x+r).toFixed(1)},${b}`;});d+=` L${W},${b} L${W},${H} L0,${H}Z`;const x0=8+ps[0]*184;
+  return `<svg class="xsec" viewBox="0 0 ${W} ${H}" aria-hidden="true"><path d="${d}" fill="var(--surface-2)" stroke="var(--line)"/><circle cx="${x0}" cy="${dp?b+1:b-4.5}" r="5.5" fill="var(--brass)" stroke="var(--bg)"/></svg>`;}
+TYPES.forEach(t=>{
+  const M=MENU(),i=M.indexOf(t);let prev=M[i-1],next=M[i+1];
+  if(t.feature){prev=TYPES.find(x=>x.key==='floating');next=TYPES.find(x=>x.key==='spinners');}
+  const d=document.createElement('div');d.className='page';d.id='page-'+t.key;d.hidden=true;
+  d.innerHTML=`
+  <section class="hero"><div class="wrap hero-grid ${t.demo?'':'solo'}">
+    <div class="hero-copy">
+      <span class="label">${t.feature?'Feature · found on several types':'Type '+(i+1)+' of '+MENU().length}</span>
+      <h1>${t.name}</h1>
+      <p class="tagline">${t.tagline}</p>
+      <p class="lead">${t.intro}</p>
+      <div class="facts-row">${t.facts.map(([a,b])=>`<span class="fact"><b>${a}</b>${b}</span>`).join('')}</div>
+      <div class="jump"><span>On this page:</span>${[['varieties','Varieties'],...(PIECES[t.key]?[['pieces','Notable pieces']]:[]),...(t.tracks?[['tracks','Tracks']]:[]),['anatomy','Anatomy'],['tuning','Tuning'],['play','Play styles'],['examples','Examples']].map(([a,b])=>`<a href="#${t.key}-${a}">${b}</a>`).join('')}</div>
+    </div>
+    ${t.demo?`<div class="demo" data-demo="${t.demo}" aria-label="Try ${t.name.toLowerCase()}"></div>`:''}
+  </div></section>
+  <section id="a-${t.key}-varieties"><div class="wrap">
+    <div class="sec-head"><span class="label">Varieties</span><h2>What sits within ${t.name.toLowerCase()}</h2></div>
+    <div class="grid">${t.varieties.map(([n,h,f])=>`<div class="card"><h3>${n}</h3><p>${h}</p><p class="feel">${f.replace(/See Tuning Forks\./,'<a href="#forks">See Tuning Forks →</a>')}</p></div>`).join('')}</div>
+  </div></section>
+  ${PIECES[t.key]?`<section id="a-${t.key}-pieces"><div class="wrap">
+    <div class="sec-head"><span class="label">Notable pieces</span><h2>${t.key==='forks'?'Tuning forks':t.name} worth seeing</h2><p class="lead">Well-known pieces that show the varieties above. Each opens photos on the maker's or retailer's page.</p></div>
+    <div class="pieces">${PIECES[t.key].map(([n,v,d,u,img])=>`<a class="piece" href="${u}" target="_blank" rel="noopener"><div class="ph">${img?`<img src="${img}" alt="${n}">`:`${ICON[t.key]}<span>Photo on maker's page</span>`}</div><div class="pc"><span class="tag">${v}</span><h3>${n}</h3><p>${d}</p><span class="go">See photos ↗</span></div></a>`).join('')}</div>
+  </div></section>`:''}
+  ${t.tracks?`<section id="a-${t.key}-tracks"><div class="wrap">
+    <div class="sec-head"><span class="label">Mechanical tracks</span><h2>Paragraph, long slide and dense</h2><p class="lead">On a mechanical slider, the pattern of notches in the track decides the feel. These are the three main tracks, shown side on with the bead in the first notch. Try each one in the demo above.</p></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">${t.tracks.map(([n,h,f,ps,dp,opt])=>`<div class="card">${xsec(ps,dp)}<h3>${n}</h3><p>${h}</p><p class="feel">${f}</p></div>`).join('')}</div>
+    <p class="note"><strong>Why dense is lighter:</strong> closer notches can't be as deep, so the bead drops less and each click carries less energy. Halve the spacing and each click has about a quarter of the energy. The side views above show the difference.</p>
+    <p class="note"><strong>Other tracks:</strong> makers often sell the same slider with a choice of tracks, and some offer segmented or mixed tracks too, such as a dense middle with two-stage clicks at the ends. Some designs let you swap the inner track.</p>
+  </div></section>`:''}
+  <section id="a-${t.key}-anatomy"><div class="wrap">
+    <div class="sec-head"><span class="label">Anatomy</span><h2>${t.key==='multi'?'What to look at':'The parts'}</h2></div>
+    <div class="anat">${t.anatomy.map(([n,p],j)=>`<div><span class="n">${String(j+1).padStart(2,'0')}</span><h3>${n}</h3><p>${p}</p></div>`).join('')}</div>
+  </div></section>
+  <section id="a-${t.key}-tuning"><div class="wrap">
+    <div class="sec-head"><span class="label">Tuning</span><h2>What changes the feel</h2><p class="lead">Each lever links to Tuning &amp; feel, where you can see how it works across other types.</p></div>
+    <div class="tune">${t.tuning.map(([n,p,h])=>`<div class="tune-row"><h3>${n}</h3><p>${p}</p><a href="#tuning-${h}">${HUBNAME[h]} →</a></div>`).join('')}</div>
+  </div></section>
+  <section id="a-${t.key}-play"><div class="wrap">
+    <div class="sec-head"><span class="label">Play styles</span><h2>How people use them</h2></div>
+    <div class="styles">${t.play.map(([s,p])=>`<a class="style" href="#play-styles-${s}"><span class="label">${STYLE[s].n}</span><h3>${p}</h3><span class="go">${STYLE[s].n} play style →</span></a>`).join('')}</div>
+  </div></section>
+  <section id="a-${t.key}-examples"><div class="wrap">
+    <div class="sec-head"><span class="label">More examples</span><h2>More to look up</h2><p class="lead">Other well-known ${t.name.toLowerCase()} to search for.</p></div>
+    <div class="ex-chips">${t.examples.map(n=>`<a class="ex-chip" href="${search(n)}" target="_blank" rel="noopener">${n}</a>`).join('')}</div>
+  </div></section>
+  <div class="wrap pager">${prev?`<a href="#${prev.key}"><span class="label">Previous</span><b>← ${prev.name}</b></a>`:`<a href="#start"><span class="label">Previous</span><b>← Start here</b></a>`}${next?`<a class="next" href="#${next.key}"><span class="label">Next</span><b>${next.name} →</b></a>`:`<a class="next" href="#materials"><span class="label">Next</span><b>Materials →</b></a>`}</div>`;
+  app.appendChild(d);
+});
+
+/* Tuning hub */
+(function(){
+  const d=document.createElement('div');d.className='page';d.id='page-tuning';d.hidden=true;
+  const tName=k=>TYPES.find(t=>t.key===k).name;
+  d.innerHTML=`<section class="hero"><div class="wrap hero-copy"><span class="label">Tuning &amp; feel</span><h1>The levers behind <em style="font-style:normal;color:var(--accent)">every feel.</em></h1><p class="lead">The same few levers shape almost every fidget. Each one is explained here, with links to the types it applies to.</p>
+   <div class="hub-nav">${HUBS.map(h=>`<a href="#tuning-${h.id}">${HUBNAME[h.id]}</a>`).join('')}</div>
+   <p class="note safety"><strong>Safety:</strong> premium fidgets use small, very strong magnets. The UK Office for Product Safety and Standards warns of serious injury and death from swallowing small high-powered magnets, so keep these away from children. <a href="https://www.gov.uk/government/news/uk-safety-alert-issued-for-small-high-powered-magnetic-products" target="_blank" rel="noopener">Read the safety alert</a></p></div></section>
+  ${HUBS.map(h=>`<section id="a-tuning-${h.id}"><div class="wrap hub-item">
+    <div class="sec-head" style="margin:0"><span class="label">Tuning</span><h2>${HUBNAME[h.id]}</h2><p class="lead">${h.intro}</p></div>
+    <div class="points">${h.points.map(([n,p])=>`<div class="card"><h3>${n}</h3><p>${p}</p></div>`).join('')}</div>
+    <div class="applies"><span class="label">Applies to</span>${h.applies.map(k=>`<a href="#${k}-tuning">${tName(k)}</a>`).join('')}</div>
+    ${h.id==='weight'?'<p class="hint"><a href="#materials-body">See the materials guide →</a></p>':''}${h.id==='surface'?'<p class="hint"><a href="#materials-finishes">See finishes in the materials guide →</a></p>':''}
+  </div></section>`).join('')}
+  <div class="wrap pager"><a href="#materials"><span class="label">Previous</span><b>← Materials</b></a><a class="next" href="#play-styles"><span class="label">Next</span><b>Play styles →</b></a></div>`;
+  app.appendChild(d);
+})();
+
+/* Play styles hub */
+(function(){
+  const d=document.createElement('div');d.className='page';d.id='page-play-styles';d.hidden=true;
+  const ORDER=['rhythm','flow','discreet','show','skill'];
+  const ROWS=[...MENU(),TYPES.find(t=>t.feature)];
+  const has=(t,s)=>t.play.find(p=>p[0]===s);
+  d.innerHTML=`<section class="hero"><div class="wrap hero-copy"><span class="label">Play styles</span><h1>How each type <em style="font-style:normal;color:var(--accent)">gets played.</em></h1><p class="lead">Five broad ways people use fidgets, set against each type. Tap or hover over a tick for detail. These are this guide's own labels.</p></div></section>
+  <section><div class="wrap">
+    <div class="tbl"><table class="ps"><thead><tr><th scope="col">Type</th>${ORDER.map(s=>`<th scope="col"><button class="ps-h" data-s="${s}">${STYLE[s].n}</button></th>`).join('')}</tr></thead>
+    <tbody>${ROWS.map(t=>`<tr><th scope="row"><a href="#${t.key}">${t.name}</a></th>${ORDER.map(s=>{const p=has(t,s);return `<td>${p?`<button class="tick" data-t="${t.key}" data-s="${s}" title="${p[1]}" aria-label="${t.name}, ${STYLE[s].n}: ${p[1]}">✓</button>`:'<span class="no" aria-label="No">·</span>'}</td>`;}).join('')}</tr>`).join('')}</tbody></table></div>
+    <div class="ps-detail" aria-live="polite"><p class="hint">Tap a tick to see how that type fits the style, or a column heading for what the style means.</p></div>
+  </div></section>
+  <section><div class="wrap"><div class="sec-head"><span class="label">The five styles</span><h2>What each one means</h2></div>
+    <div class="styles">${STYLES.map(s=>`<div class="style" id="a-play-styles-${s.id}"><span class="label">${STYLE[s.id].n}</span><h3>${STYLE[s.id].s}</h3><p>${s.tune}</p></div>`).join('')}</div>
+  </div></section>
+  <div class="wrap pager"><a href="#tuning"><span class="label">Previous</span><b>← Tuning &amp; feel</b></a><a class="next" href="#find"><span class="label">Next</span><b>What suits you →</b></a></div>`;
+  app.appendChild(d);
+  const det=$('.ps-detail',d);
+  function show(btn){
+    d.querySelectorAll('.tick.on,.ps-h.on').forEach(x=>x.classList.remove('on'));btn.classList.add('on');
+    const s=btn.dataset.s;
+    if(btn.classList.contains('tick')){const t=TYPES.find(x=>x.key===btn.dataset.t),p=has(t,s);det.innerHTML=`<div class="card-top">${ICON[t.key]}<div><span class="label">${STYLE[s].n}</span><h3>${t.name}</h3></div></div><p>${p[1]}</p><a class="go" href="#${t.key}">Explore ${t.name.toLowerCase()} →</a>`;}
+    else{const st=STYLES.find(x=>x.id===s);det.innerHTML=`<span class="label">Play style</span><h3>${STYLE[s].n}</h3><p>${STYLE[s].s} ${st.tune}</p>`;}
+  }
+  d.querySelectorAll('.tick,.ps-h').forEach(b=>{b.addEventListener('click',()=>show(b));b.addEventListener('mouseenter',()=>show(b));b.addEventListener('focus',()=>show(b));});
+})();
+
+/* Find your fidget */
+(function(){
+  const d=document.createElement('div');d.className='page';d.id='page-find';d.hidden=true;
+  d.innerHTML=`<section class="hero"><div class="wrap"><div class="sec-head"><span class="label">What suits you</span><h1>Which types fit <em style="font-style:normal;color:var(--accent)">how you fidget?</em></h1><p class="lead">Three quick questions about what your hands already do, where you'd use one and the feedback you like. It points you to the types worth reading about first.</p></div><div class="quiz" id="quiz"></div></div></section>
+  <div class="wrap pager"><a href="#play-styles"><span class="label">Previous</span><b>← Play styles</b></a><a class="next" href="#start"><span class="label">Back to</span><b>Start here →</b></a></div>`;
+  app.appendChild(d);
+  const Q=[
+   {t:'What do your hands already do?',o:[['Click pens',{clickers:2,sliders:2}],['Rub or slide my thumb on things',{sliders:2,floating:2}],['Twirl or flick objects',{spinners:3}],['Turn coins or rings',{coins:2,rings:2}],['Want something to master',{'skill-toys':3,spinners:1,multi:1}]]},
+   {t:'Where will you use it most?',o:[['Meetings and video calls',{sliders:1,spinners:1,clickers:-3,coins:-2,forks:-3},'meet'],['Desk at home',{spinners:1,multi:1,forks:1},'desk'],['Everyday pocket carry',{coins:1,sliders:1,floating:1,rings:1},'pocket'],['Shared or quiet spaces',{rings:1,clickers:-3,coins:-2,sliders:-1,forks:-3},'quiet']]},
+   {t:'What feedback do you want back?',o:[['A magnetic snap',{sliders:2,coins:2}],['A crisp click',{clickers:2,sliders:1,rings:1}],['A ringing ding',{forks:3}],['Free movement and tricks',{floating:3,'skill-toys':1}],['A long spin',{spinners:3,rings:1}],['A bit of everything',{multi:3}]]}
+  ];
+  const TIP={meet:'Ask for softer magnets or titanium to keep it quiet.',desk:'Go heavier: copper, brass or zirconium give the most satisfying weight.',pocket:'Stonewashed titanium or stainless steel are the hardest-wearing all-rounders.',quiet:'Soft magnets, washers and titanium keep the sound down.'};
+  let step=0,ans=[];const quiz=$('#quiz',d);
+  function prog(){return `<div class="progress" aria-hidden="true">${[0,1,2,3].map(i=>`<i class="${i<=step?'on':''}"></i>`).join('')}</div>`;}
+  function render(){
+    if(step<3){const q=Q[step];quiz.innerHTML=prog()+`<div class="q"><span class="label">Question ${step+1} of 3</span><h3>${q.t}</h3><div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}">${o[0]}</button>`).join('')}</div></div>${step?'<div class="quiz-nav"><button class="btn ghost" id="qback">Back</button></div>':''}`;return;}
+    const sc={};TYPES.forEach(t=>sc[t.key]=0);ans.forEach((a,qi)=>{Object.entries(Q[qi].o[a][1]).forEach(([k,v])=>sc[k]+=v);});
+    const ranked=Object.entries(sc).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).slice(0,2);
+    const setting=Q[1].o[ans[1]][2];
+    const picks=ranked.length?ranked:[['sliders',1]];
+    quiz.innerHTML=prog()+`<div class="q"><span class="label">Worth reading about first</span><h3>${picks.map(([k])=>TYPES.find(t=>t.key===k).name).join(' or ')}</h3></div>
+    <div class="results">${picks.map(([k])=>{const t=TYPES.find(x=>x.key===k);return `<div class="result"><div class="card-top">${ICON[k]}<h3>${t.name}</h3></div><p>${t.short}</p><p class="tip"><strong>Tuning tip:</strong> ${TIP[setting]}</p><div class="tags">${t.play.map(([s])=>`<a class="tag" href="#play-styles-${s}" style="text-decoration:none">${STYLE[s].n}</a>`).join('')}</div><div><a class="btn" href="#${k}">Explore ${t.name.toLowerCase()}</a></div></div>`;}).join('')}</div>
+    <div class="quiz-nav"><button class="btn ghost" id="qback">Back</button><button class="btn" id="qrestart">Start again</button></div>`;
+  }
+  quiz.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.i!==undefined){ans[step]=+b.dataset.i;step++;render();}
+    else if(b.id==='qback'){step=Math.max(0,step-1);render();}
+    else if(b.id==='qrestart'){ans=[];step=0;render();}});
+  render();
+})();
+
+/* ---------- Start page: type grid ---------- */
+const grid=document.getElementById('typeGrid');
+grid.innerHTML=MENU().map(t=>`<a class="card" href="#${t.key}" data-tags="${t.tags.join(' ')}">
+  <div class="card-top">${ICON[t.key]}<div><h3>${t.name}</h3><div class="noise" aria-label="Noise: ${t.nl}">${[0,1,2,3,4].map(i=>`<i class="${i<=t.noise?'on':''}" style="height:${5+i*2}px"></i>`).join('')}</div></div></div>
+  <p>${t.short}</p><div class="tags">${t.tags.map(g=>`<span class="tag">${{quiet:'Quiet',clicky:'Clicky',pocket:'Pocket-friendly'}[g]}</span>`).join('')}</div><span class="go">Explore →</span></a>`).join('');
+document.querySelectorAll('.chip[data-filter]').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip[data-filter]').forEach(x=>x.setAttribute('aria-pressed','false'));ch.setAttribute('aria-pressed','true');
+  const f=ch.dataset.filter;grid.querySelectorAll('.card').forEach(c=>{c.hidden=!(f==='all'||c.dataset.tags.split(' ').includes(f));});}));
+
+/* Materials explorer */
+const MATS=[
+  {g:'Core metals',k:'al',sym:'Al',n:'Aluminium',col:'#c9ced4',w:3,d:'About 2.7 g/cm³',made:'A single light metal, usually anodised for colour',feel:'Very light; can feel less substantial than premium metals',sound:'Soft, dull',age:'Some finishes scratch easily, and colour can wear at the edges',best:'Larger designs that would be too heavy in steel or copper; usually the most affordable, and easy to machine'},
+  {g:'Core metals',k:'ti',sym:'Ti',n:'Titanium',col:'#9fb6cf',w:4,d:'About 4.5 g/cm³ (varies by alloy)',made:'A single metal, or a titanium alloy',feel:'Light but still premium; strong and comfortable',sound:'Soft',age:'Excellent corrosion resistance. Can be heat-coloured or anodised blue, purple, bronze or gold without paint',best:'The safe all-rounder and a common first premium piece. Takes every finish: stonewashed, blasted, satin, polished, coloured or DLC'},
+  {g:'Core metals',k:'zr',sym:'Zr',n:'Zirconium',col:'#5b5f66',w:5,d:'About 6.5 g/cm³',made:'A single metal; metallic grey untreated',feel:'Denser and heavier than titanium, smooth',sound:'Clean, a little deeper',age:'Heat treatment grows a hard, dark oxide layer: "black zirconium". Matte or blasted black hides fingerprints better than polished',light:true,best:'A middle ground between titanium and the heavy metals; pricier than titanium'},
+  {g:'Core metals',k:'ss',sym:'SS',n:'Stainless steel',col:'#b4b8bd',w:6,d:'About 7.9 g/cm³',made:'An iron alloy with chromium',feel:'Heavy, solid, colder and stiffer than titanium',sound:'Crisp, bright click',age:'Durable and stays much as bought; stonewashed hides everyday marks',best:'A crisp, substantial slider for less than titanium or zirconium'},
+  {g:'Core metals',k:'br',sym:'CuZn',n:'Brass',col:'#d6b25e',w:7,d:'About 8.5 g/cm³',made:'Copper and zinc',feel:'Heavy and warm',sound:'Warm, ringing',age:'Brighter gold than copper, darkening to a golden-brown patina',best:'Patina, and retro, industrial or steampunk designs'},
+  {g:'Core metals',k:'bz',sym:'CuSn',n:'Bronze',col:'#b8864b',w:7,d:'About 8.8 g/cm³',made:'Copper and tin',feel:'Heavy',sound:'Warm',age:'Patinas to a deep brown',best:'Patina'},
+  {g:'Core metals',k:'cn',sym:'CuNi',n:'Cupronickel',col:'#c2bdb3',w:7,d:'About 8.9 g/cm³',made:'Copper and nickel',feel:'Heavy',sound:'Warm, a little brighter than copper',age:'Silvery; ages more slowly than copper',best:'A heavy, silvery alternative to copper'},
+  {g:'Core metals',k:'cu',sym:'Cu',n:'Copper',col:'#c97a52',w:7,d:'About 8.9 g/cm³',made:'A single metal',feel:'Heavy, dense and warm',sound:'Warm, dense',age:'Patinas from air, moisture, skin oils and handling, towards darker, warmer browns and greens. Two identical pieces can look very different after a few months',best:'Patina and heavy carry'},
+  {g:'Core metals',k:'wcu',sym:'WCu',n:'Tungsten copper',col:'#6e5a4e',w:8,d:'About 14–17 g/cm³, depending on the mix',made:'Tungsten mixed with copper',feel:'Very heavy: over three times the weight of titanium',sound:'Dense, low',age:'Very stable; often used for weights and rims',light:true,best:'Spinner rims and weights for more momentum'},
+  {g:'Core metals',k:'w',sym:'W',n:'Tungsten',col:'#7d8188',w:9,d:'About 19.3 g/cm³',made:'A single, very dense metal',feel:'The heaviest of all: more than four times the weight of titanium',sound:'Dense, low',age:'Very hard and stable',light:true,best:'Heavy spinners: a small one carries a lot of momentum. Not everyone\'s idea of pocket carry'},
+  {g:'Patterned metals',k:'tim',sym:'Tim',n:'Timascus',col:'conic-gradient(#3e5f9c,#7a4aa8,#c99a3b,#3e5f9c)',w:4,d:'About 4.5 g/cm³, like titanium',made:'Several titanium alloys layered and forged together',feel:'Light, like titanium',sound:'Soft, like titanium',age:'Heat-colouring brings out swirls of blue, purple and gold; can scratch',best:'Colour and pattern on a light piece'},
+  {g:'Patterned metals',k:'mok',sym:'MkTi',n:'Mokuti',col:'repeating-conic-gradient(#3e5f9c 0 15deg,#c99a3b 15deg 30deg,#7a4aa8 30deg 45deg)',w:4,d:'About 4.5 g/cm³, like titanium',made:'Layered titanium alloys bonded together, usually with a finer pattern than Timascus',feel:'Light, like titanium',sound:'Soft, like titanium',age:'Blue, purple, gold, bronze and silver once coloured. No two pieces match: the billet, cut, polish and colouring all change the pattern',best:'Collectors; bodies, buttons and plates. Costly to make, with a lot of waste'},
+  {g:'Patterned metals',k:'zct',sym:'ZrTi',n:'Zircuti',col:'conic-gradient(#2a2d33,#3e5f9c,#2a2d33,#7a4aa8,#2a2d33)',w:5,d:'Between titanium and zirconium',made:'Titanium layered with zirconium',feel:'Light to medium',sound:'Clean',age:'The two metals colour differently when heated: zirconium turns black, giving dark veins through blue, purple, bronze and gold',light:true,best:'Collector sliders, spinner bodies, buttons, plates and inserts; stronger dark-and-light contrast than Mokuti'},
+  {g:'Patterned metals',k:'dkt',sym:'Dk',n:'Darkit',col:'conic-gradient(#1f2125,#3e5f9c 20%,#1f2125 45%,#7a4aa8 70%,#1f2125)',w:5,d:'Between titanium and zirconium',made:'Like Zircuti, with more zirconium',feel:'Light to medium',sound:'Clean',age:'Bigger patterns and thicker dark lines than Zircuti',light:true,best:'Bold, high-contrast patterns'},
+  {g:'Patterned metals',k:'dam',sym:'Dm',n:'Damascus steel',col:'repeating-linear-gradient(60deg,#8d9197 0 4px,#4a4e54 4px 8px)',w:6,d:'About 7.8 g/cm³, like steel',made:'Layers of different steels forged together, then etched to show the pattern',feel:'Heavy, like steel',sound:'Crisp, like steel',age:'Rippled pattern; non-stainless Damascus needs care to avoid rust',best:'Pattern with a steel feel'},
+  {g:'Patterned metals',k:'dms',sym:'DS',n:'Damasteel',col:'repeating-linear-gradient(120deg,#a9adb3 0 3px,#5d6167 3px 6px)',w:6,d:'About 7.8 g/cm³, like steel',made:'Patterned stainless steel, made in Sweden',feel:'Heavy, like steel',sound:'Crisp, like steel',age:'A stainless Damascus pattern that resists rust',best:'Damascus looks without the rust worry'},
+  {g:'Patterned metals',k:'mkg',sym:'MG',n:'Mokume gane',col:'repeating-linear-gradient(20deg,#c97a52 0 5px,#d6b25e 5px 9px,#c2bdb3 9px 12px)',w:7,d:'About 8.5–8.9 g/cm³',made:'Layers of non-ferrous metals such as copper, brass and nickel silver',feel:'Heavy',sound:'Warm',age:'A "wood grain" pattern; the copper layers patina over time',best:'Pattern that keeps changing as it ages'},
+  {g:'Patterned metals',k:'sc',sym:'SC',n:'Superconductor',col:'radial-gradient(circle,#c97a52 0 2px,#8a8e94 2.5px) 0 0/7px 7px',w:7,d:'About 8.6–8.9 g/cm³, like copper',made:'Fine niobium-based filaments set in a copper body, originally made as superconducting wire',feel:'Heavy, like copper',sound:'Warm, like copper',age:'A mosaic of dots or hexagons; the copper patinas',best:'A one-off mosaic pattern'},
+  {g:'Engineering plastics',k:'pom',sym:'POM',n:'POM (Delrin)',col:'#ecebe4',w:2,d:'About 1.4 g/cm³',made:'An engineering plastic, also sold as Delrin',feel:'Light, dry and clean, with very little friction',sound:'Quiet',age:'Wears well',best:'Smooth sliders and an easy, affordable first magnetic slider; also used for tracks and beads'},
+  {g:'Engineering plastics',k:'peek',sym:'PEEK',n:'PEEK',col:'#c9b68e',w:2,d:'About 1.3 g/cm³',made:'A high-performance engineering plastic',feel:'Light, warm and smooth; less cold than metal',sound:'Quiet',age:'Strong, heat-resistant and keeps its shape; often called the "luxury plastic"',best:'Light everyday carry, tracks and impact plates'},
+  {g:'Engineering plastics',k:'pei',sym:'PEI',n:'PEI (Ultem)',col:'#d99b3c',w:2,d:'About 1.27 g/cm³',made:'An amber, see-through engineering plastic',feel:'Very light, stiff, with a dry feel',sound:'Quiet',age:'Keeps its shape; the parts inside can show through the amber',best:'Light bodies and plates you can partly see into'},
+  {g:'Engineering plastics',k:'pmma',sym:'PMMA',n:'Acrylic (PMMA)',col:'linear-gradient(135deg,rgba(180,210,235,.9),rgba(240,248,255,.6))',w:2,d:'About 1.18 g/cm³',made:'A clear plastic, in many colours and levels of see-through',feel:'Light and smooth',sound:'Quiet',age:'Polished surfaces show fingerprints and fine scratches easily',best:'Clear, eye-catching builds'},
+  {g:'Engineering plastics',k:'pc',sym:'PC',n:'Polycarbonate',col:'linear-gradient(135deg,rgba(200,205,212,.9),rgba(245,246,248,.6))',w:2,d:'About 1.2 g/cm³',made:'A tough, often clear plastic',feel:'Light and smooth; feels a little softer than the harder plastics',sound:'Quiet',age:'Very impact-resistant',best:'Light, clear or see-through designs that need to take knocks'},
+  {g:'Other non-metals',k:'g10',sym:'G10',n:'G10',col:'repeating-linear-gradient(0deg,#2f3a2e 0 3px,#46553f 3px 5px)',w:2,d:'About 1.8 g/cm³',made:'Fibreglass cloth set in epoxy, as used on knife handles',feel:'Light and grippy, with surface texture',sound:'Quiet',age:'Very tough and impact-resistant; machining can leave a directional texture',best:'Grip and a utilitarian look'},
+  {g:'Other non-metals',k:'wd',sym:'Wd',n:'Wood',col:'repeating-linear-gradient(80deg,#8a5a34 0 3px,#a8743f 3px 7px)',w:1,d:'About 0.4–0.9 g/cm³',made:'Natural timber',feel:'The lightest, warm to the touch',sound:'Soft and quiet',age:'Can dent and react to moisture; each piece has its own grain',best:'A warm, natural feel'}
+];
+let selected=['ti'],compare=false;
+const swWrap=document.getElementById('swatches'),panels=document.getElementById('panels'),cmp=document.getElementById('compareToggle');
+const disc=m=>`<span class="disc" style="background:${m.col};${m.light?'color:#f1f1f1':''}">${m.sym}</span>`;
+swWrap.innerHTML=[...new Set(MATS.map(m=>m.g))].map(g=>`<div class="sw-group"><span class="label">${g}</span><div class="sw-row">${MATS.filter(m=>m.g===g).map(m=>`<button class="sw" data-k="${m.k}" aria-pressed="false">${disc(m)}<span class="nm">${m.n}</span></button>`).join('')}</div></div>`).join('');
+function renderMats(){
+  swWrap.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',String(selected.includes(b.dataset.k))));
+  panels.innerHTML=selected.map(k=>{const m=MATS.find(x=>x.k===k);return `<div class="panel"><div class="panel-head">${disc(m)}<div><span class="label">${m.g}</span><h3>${m.n}</h3></div></div>
+    <div style="display:grid;gap:6px"><span class="label">Weight in the hand</span><div class="weight-bar">${[1,2,3,4,5,6,7,8,9].map(i=>`<i class="${i<=m.w?'on':''}"></i>`).join('')}</div><div class="weight-scale"><span>Light</span><span>Heavy</span></div></div>
+    <dl class="facts"><div><dt>Made of</dt><dd>${m.made}</dd></div><div><dt>Density</dt><dd>${m.d}</dd></div><div><dt>Feels</dt><dd>${m.feel}</dd></div><div><dt>Sounds</dt><dd>${m.sound}</dd></div><div><dt>Over time</dt><dd>${m.age}</dd></div><div><dt>Good for</dt><dd>${m.best}</dd></div></dl></div>`;}).join('');
+}
+swWrap.addEventListener('click',e=>{const b=e.target.closest('.sw');if(!b)return;const k=b.dataset.k;
+  if(!compare)selected=[k];else if(selected.includes(k)){if(selected.length>1)selected=selected.filter(x=>x!==k);}else selected=selected.length>=2?[selected[1],k]:[...selected,k];renderMats();});
+cmp.addEventListener('change',()=>{compare=cmp.checked;if(!compare)selected=[selected[selected.length-1]];else if(selected.length<2)selected=[selected[0],selected[0]==='ss'?'ti':'ss'];renderMats();});
+renderMats();
+
+/* ---------- Mount demos ---------- */
+const DEMOS={'slider-lite':el=>demoSlider(el,false),slider:el=>demoSlider(el,true),fork:demoFork,floating:demoFloating,spinner:demoSpinner,coin:demoCoin,ring:demoRing,clicker:demoClicker};
+document.querySelectorAll('[data-demo]').forEach(el=>{try{DEMOS[el.dataset.demo](el);addTaps(el);}catch(e){console.error(e);}});
+
+/* ---------- Menu ---------- */
+const typesDrop=document.getElementById('typesDrop'),typesBtn=document.getElementById('typesBtn'),menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('mainNav');
+typesDrop.innerHTML=MENU().map(t=>`<li><a href="#${t.key}" data-page="${t.key}">${ICON[t.key]}${t.name}</a></li>`).join('');
+function closeDrop(){typesDrop.hidden=true;typesBtn.setAttribute('aria-expanded','false');}
+typesBtn.addEventListener('click',e=>{e.stopPropagation();const o=!typesDrop.hidden;typesDrop.hidden=o;typesBtn.setAttribute('aria-expanded',String(!o));});
+document.addEventListener('click',e=>{if(!e.target.closest('.has-drop'))closeDrop();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrop();});
+menuBtn.addEventListener('click',()=>{const o=nav.dataset.open==='true';nav.dataset.open=String(!o);menuBtn.setAttribute('aria-expanded',String(!o));menuBtn.textContent=o?'Menu':'Close';});
+
+/* ---------- Router ---------- */
+const PAGES=['start',...TYPES.map(t=>t.key),'materials','tuning','play-styles','find'].sort((a,b)=>b.length-a.length);
+function route(){
+  const h=decodeURIComponent(location.hash.slice(1));
+  let page=PAGES.find(p=>h===p||h.startsWith(p+'-'))||'start';
+  document.querySelectorAll('.page').forEach(p=>p.hidden=p.id!=='page-'+page);
+  document.querySelectorAll('[data-page]').forEach(a=>a.classList.toggle('active',a.dataset.page===page));
+  typesBtn.classList.toggle('active',MENU().some(t=>t.key===page));
+  closeDrop();nav.dataset.open='false';menuBtn.setAttribute('aria-expanded','false');menuBtn.textContent='Menu';
+  const target=h&&h!==page?document.getElementById('a-'+h):null;
+  if(target)requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));else window.scrollTo(0,0);
+  const t=TYPES.find(x=>x.key===page);document.title=(t?t.name+' · ':page==='tuning'?'Tuning & feel · ':page==='play-styles'?'Play styles · ':page==='find'?'What suits you · ':page==='materials'?'Materials · ':'')+'Fidget Toy Guide';
+}
+addEventListener('hashchange',route);route();
+</script>
+
+</body>
+</html>

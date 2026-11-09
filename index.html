@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fidget Toy Guide</title>
+<meta name="description" content="An illustrated guide to fidget toys: sliders, spinners, clickers and more, with live demos, materials, tuning and play styles.">
+<style>body{margin:0;background:#141619;color:#a3a7ad;font:16px system-ui,sans-serif;display:grid;place-items:center;min-height:100vh}@media (prefers-color-scheme:light){body{background:#eeede8;color:#5d6168}}</style>
+</head>
+<body>
+<p>Loading the latest guide…</p>
+<noscript><p><a href="app.html">Open the guide</a></p></noscript>
+<script>
+/* GitHub Pages lets browsers and its CDN keep pages for up to 10 minutes. This small page asks GitHub for the
+   latest commit, then loads app.html from exactly that commit, so the shared link shows updates within a minute.
+   If GitHub can't be reached, it falls back to the copy on this site. */
+(function(){
+  var R='bafnottingham-oss/fidget-guide';
+  function show(h){document.open();document.write(h);document.close();}
+  function local(){fetch('app.html?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();}).then(show).catch(function(){location.replace('app.html'+location.hash);});}
+  fetch('https://api.github.com/repos/'+R+'/commits/main',{cache:'no-store',headers:{Accept:'application/vnd.github+json'}})
+    .then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(c){return fetch('https://raw.githubusercontent.com/'+R+'/'+c.sha+'/app.html');})
+    .then(function(r){if(!r.ok)throw 0;return r.text();})
+    .then(function(h){if(h.indexOf('Fidget Toy Guide')<0)throw 0;show(h);})
+    .catch(local);
+})();
+</script>
+</body>
+</html>
