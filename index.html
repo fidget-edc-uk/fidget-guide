@@ -15,7 +15,7 @@
    latest commit, then loads app.html from exactly that commit, so the shared link shows updates within a minute.
    If GitHub can't be reached, it falls back to the copy on this site. */
 (function(){
-  var R='bafnottingham-oss/fidget-guide';
+  var R='fidget-edc-uk/fidget-guide';
   function show(h){document.open();document.write(h);document.close();}
   function local(){fetch('app.html?t='+Date.now(),{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.text();}).then(show).catch(function(){location.replace('app.html'+location.hash);});}
   fetch('https://api.github.com/repos/'+R+'/commits/main',{cache:'no-store',headers:{Accept:'application/vnd.github+json'}})
